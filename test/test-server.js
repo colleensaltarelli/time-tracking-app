@@ -7,11 +7,11 @@ chai.use(chaiHttp);
 
 describe('Home Page', function() {
     
-      before(runServer);
+      before(() => runServer(8081));
     
       after(closeServer);
     
-      it('index.html should say hello world on GET', function() {
+      it('should say hello on GET', function() {
         return chai.request(app)
         .get('/')
         .then((res) => {
