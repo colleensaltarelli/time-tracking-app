@@ -1,8 +1,8 @@
 {
-  "name": "node-jwt-auth",
+  "name": "node-tracking-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "mocha"
@@ -21,8 +21,7 @@
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
-    "passport-local": "^1.0.0",
-    "request": "^2.83.0"
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^4.0.1",
