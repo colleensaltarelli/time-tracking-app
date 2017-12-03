@@ -21,14 +21,14 @@ describe('Pages Load', function() {
         });
       });
 
-      it('should load timesheet on GET', function() {
-        return chai.request(app)
-        .get('/timesheet')
-        .then((res) => {
-          res.should.have.status(200);
-          res.should.be.html;
-        });
-      });
+      // it('should load timesheet on GET', function() {
+      //   return chai.request(app)
+      //   .get('/timesheet')
+      //   .then((res) => {
+      //     res.should.have.status(200);
+      //     res.should.be.html;
+      //   });
+      // });
 
       it('should load signup on GET', function() {
         return chai.request(app)
@@ -48,21 +48,21 @@ describe('Pages Load', function() {
         });
       });
 
-      it('should load admin on GET', function() {
-        return chai.request(app)
-        .get('/admin')
-        .then((res) => {
-          res.should.have.status(200);
-          res.should.be.html;
-        });
-      });
+      // it('should load admin on GET', function() {
+      //   return chai.request(app)
+      //   .get('/admin')
+      //   .then((res) => {
+      //     res.should.have.status(200);
+      //     res.should.be.html;
+      //   });
+      // });
 
-      it('should load account on GET', function() {
-        return chai.request(app)
-        .get('/account')
-        .then((res) => {
-          res.should.have.status(200);
-          res.should.be.html;
-        });
-      });
-    });
+    //   it('should load account on GET', function() {
+    //     return chai.request(app)
+    //     .get('/account')
+    //     .then((res) => {
+    //       res.should.have.status(200);
+    //       res.should.be.html;
+    //     });
+    //   });
+    // });
