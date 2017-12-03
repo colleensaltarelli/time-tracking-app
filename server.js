@@ -34,6 +34,10 @@ app.use(function (req, res, next) {
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
+// declare ejs static files
+app.use("/stylesheets", express.static(__dirname + "/stylesheets"));
+app.use("/javascripts", express.static(__dirname + "/javascripts"));
+
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
@@ -73,13 +77,20 @@ let server;
 const PORT = process.env.PORT || 8080;
 
 function runServer(databaseUrl=DATABASE_URL, port=PORT) {
-  
   return new Promise((resolve, reject) => {
-    server = app.listen(port, () => {
-      console.log(`Your app is listening on port ${port}`);
-      resolve(server);
-    }).on('error', err => {
-      reject(err)
+    mongoose.connect(databaseUrl, err => {
+      if (err) {
+          return reject(err);
+      }
+      console.log(`You are now connected to your database at: ${databaseUrl}`);
+      server = app.listen(port, () => {
+          console.log(`Your app (node server) is listening on port ${port}`);
+          resolve();
+      })
+      .on('error', err => {
+          mongoose.disconnect();
+          reject(err);
+      });
     });
   });
 }

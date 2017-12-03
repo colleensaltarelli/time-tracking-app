@@ -10,7 +10,6 @@ router.get('/timesheet/', jwtAuth, function(req, res) {
   res.render('pages/timesheet');
 });
 
-
 // admin page 
 router.get('/admin/', jwtAuth, function(req, res) {
   res.render('pages/admin');

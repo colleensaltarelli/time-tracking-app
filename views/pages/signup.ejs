@@ -1,17 +1,38 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+
+<main>
+
 <p>sign up</p>
 
 <form action="/api/users/signup" method="post">
     First name:<br>
-    <input type="text" name="firstName" value="Mickey">
+    <input type="text" name="firstName" value="Donald">
     <br>
     Last name:<br>
-    <input type="text" name="lastName" value="Mouse">
+    <input type="text" name="lastName" value="Duck">
     <br><br>
     Email:<br>
-    <input type="text" name="email" value="Mouse@mouse.com">
+    <input type="text" name="email" value="Donald@mouse.com">
     <br><br>
     Password:<br>
-    <input type="text" name="password" value="MouseHOUSE123">
+    <input type="text" name="password" value="DonaldDUCK123">
     <br><br>
     <input type="submit" value="Submit">
   </form> 
+
+</main>
+
+<% include ../partials/footer %>
+</body>
+</html>

@@ -1,6 +1,9 @@
 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+mongoose.Promise = global.Promise;
 
 const {User} = require('./models');
 
@@ -105,7 +108,7 @@ router.post('/signup', jsonParser, (req, res) => {
         email,
         password: hash,
         firstName,
-        lastName
+        lastName,
       });
     })
     .then(user => {
