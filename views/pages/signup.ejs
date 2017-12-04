@@ -15,20 +15,21 @@
 
 <p>sign up</p>
 
-<form action="/api/users/signup" method="post">
-    First name:<br>
-    <input type="text" name="firstName" value="Donald">
-    <br>
-    Last name:<br>
-    <input type="text" name="lastName" value="Duck">
-    <br><br>
-    Email:<br>
-    <input type="text" name="email" value="Donald@mouse.com">
-    <br><br>
-    Password:<br>
-    <input type="text" name="password" value="DonaldDUCK123">
-    <br><br>
-    <input type="submit" value="Submit">
+<form action="/api/users/signup" method="post" name="signUp" id="signup" >
+    <label for="firstName">First Name</label>
+    <input type="text" name="firstName" value="Pluto">
+
+    <label for="lastName">Last Name</label>
+    <input type="text" name="lastName" value="Dog">
+
+    <label for="email">Email</label>
+    <input type="text" name="email" value="PlutoDog@mouse.com">
+
+    <label for="password">Password</label>
+    <input type="text" name="password" value="PlutoDog123">
+
+    <input id="signup-button" type="submit" class="btn" value="Submit">
+    <p class="login-message">Already have an account? <a href="/login" id="logInLink">Login</a></p>
   </form> 
 
 </main>

@@ -15,14 +15,15 @@
 
 <p>log in</p>
 
-<form action="/api/auth/login" method="post">
-    Email:<br>
-    <input type="text" name="username" value="12@3.com">
-    <br><br>
-    Password:<br>
-    <input type="text" name="password" value="123">
-    <br><br>
-    <input type="submit" value="Submit">
+<form action="/api/auth/login" method="post" name="logIn" id="login">
+    <label for="email">Email</label>
+    <input type="text" name="email" value="PlutoDog@mouse.com">
+
+    <label for="password">Password</label>
+    <input type="text" name="password" value="PlutoDog123">
+
+    <input id="login-button" type="submit" class="btn" value="Submit">
+    <p class="login-message">Don't have an account? <a href="/signup" id="signUpLink">Sign Up</a></p>
   </form> 
 </main>
 
