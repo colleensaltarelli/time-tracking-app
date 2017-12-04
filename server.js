@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('common'));
 
 // CORS
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
   res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
@@ -55,17 +55,17 @@ app.get('/api/protected', jwtAuth, (req, res) => {
 });
 
 // index page 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   res.render('pages/index');
 });
 
 // signup page 
-app.get('/signup/', function(req, res) {
+app.get('/signup/', (req, res) => {
   res.render('pages/signup');
 });
 
 // login page 
-app.get('/login/', function(req, res) {
+app.get('/login/', (req, res) => {
   res.render('pages/login');
 });
 

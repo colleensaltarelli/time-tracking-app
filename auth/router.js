@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const router = express.Router();
 
-const createAuthToken = function(user) {
+const createAuthToken = (user) => {
   return jwt.sign({user}, config.JWT_SECRET, {
     subject: user.email,
     expiresIn: config.JWT_EXPIRY,
@@ -15,8 +15,11 @@ const createAuthToken = function(user) {
   });
 };
 
-const localAuth = passport.authenticate('local', {session: false});
+const localAuth = passport.authenticate('local', { successRedirect: '/',
+failureRedirect: '/login' });
+
 router.use(bodyParser.json());
+
 // The user provides a username and password to login
 router.post('/login', localAuth, (req, res) => {
   const authToken = createAuthToken(req.user.apiRepr());

@@ -6,13 +6,13 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('Pages Load', function() {
+describe('Pages Load', () => {
     
       before(() => runServer(TEST_DATABASE_URL, 8081));
     
       after(closeServer);
     
-      it('should load homepage on GET', function() {
+      it('should load homepage on GET', () => {
         return chai.request(app)
         .get('/')
         .then((res) => {
@@ -21,7 +21,7 @@ describe('Pages Load', function() {
         });
       });
 
-      // it('should load timesheet on GET', function() {
+      // it('should load timesheet on GET', () => {
       //   return chai.request(app)
       //   .get('/timesheet')
       //   .then((res) => {
@@ -30,7 +30,7 @@ describe('Pages Load', function() {
       //   });
       // });
 
-      it('should load signup on GET', function() {
+      it('should load signup on GET', () => {
         return chai.request(app)
         .get('/signup')
         .then((res) => {
@@ -39,7 +39,7 @@ describe('Pages Load', function() {
         });
       });
 
-      it('should load login on GET', function() {
+      it('should load login on GET', () => {
         return chai.request(app)
         .get('/login')
         .then((res) => {
@@ -48,7 +48,7 @@ describe('Pages Load', function() {
         });
       });
 
-      // it('should load admin on GET', function() {
+      // it('should load admin on GET', () => {
       //   return chai.request(app)
       //   .get('/admin')
       //   .then((res) => {
@@ -57,7 +57,7 @@ describe('Pages Load', function() {
       //   });
       // });
 
-    //   it('should load account on GET', function() {
+    //   it('should load account on GET', () => {
     //     return chai.request(app)
     //     .get('/account')
     //     .then((res) => {
