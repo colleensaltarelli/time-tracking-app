@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const moment = require('moment');
+moment().format();
 
 mongoose.Promise = global.Promise;
 
@@ -37,9 +40,20 @@ app.set('view engine', 'ejs');
 // declare ejs static files
 app.use("/stylesheets", express.static(__dirname + "/stylesheets"));
 app.use("/javascripts", express.static(__dirname + "/javascripts"));
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
+
+passport.serializeUser(function(user, done) { done(null, user);});
+passport.deserializeUser(function(user, done) { done(null, user);});
 
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);

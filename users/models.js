@@ -20,7 +20,7 @@ const UserSchema = mongoose.Schema({
   admin: {type: Boolean, default: false}
 });
 
-UserSchema.methods.apiRepr = () => {
+UserSchema.methods.apiRepr = function () {
   return {
     email: this.email || '',
     firstName: this.firstName || '',
@@ -30,7 +30,7 @@ UserSchema.methods.apiRepr = () => {
   };
 };
 
-UserSchema.methods.validatePassword = (password) => {
+UserSchema.methods.validatePassword = function (password) {
   return bcrypt.compare(password, this.password);
 };
 

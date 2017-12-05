@@ -6,6 +6,8 @@ const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 const { User } = require('../users/models');
 const { JWT_SECRET } = require('../config');
 
+let user
+
 const localStrategy = new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password'
@@ -31,6 +33,7 @@ function(email, password, callback) {
           message: 'Incorrect email or password'
         });
       }
+      console.log('user', user)
       return callback(null, user);
     })
     .catch(err => {

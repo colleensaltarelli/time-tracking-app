@@ -6,7 +6,8 @@ const passport = require('passport');
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
 // timesheet page 
-router.get('/timesheet/', jwtAuth, function(req, res) {
+router.get('/timesheet/', function(req, res) {
+  console.log('req.user timesheet', req.user)
   res.render('pages/timesheet');
 });
 

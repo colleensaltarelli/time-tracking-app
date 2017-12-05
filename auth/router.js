@@ -15,15 +15,17 @@ const createAuthToken = (user) => {
   });
 };
 
-const localAuth = passport.authenticate('local', { successRedirect: '/',
-failureRedirect: '/login' });
+const localAuth = passport.authenticate('local', {session: false});
 
 router.use(bodyParser.json());
 
 // The user provides a username and password to login
-router.post('/login', localAuth, (req, res) => {
+
+router.post('/login', localAuth, (req, res) => {  
+  console.log('req.user', req.user)
   const authToken = createAuthToken(req.user.apiRepr());
-  res.json({authToken});
+  // res.json({authToken});
+  res.redirect('/app/timesheet')
 });
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
