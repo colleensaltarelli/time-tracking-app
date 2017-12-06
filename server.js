@@ -14,6 +14,7 @@ mongoose.Promise = global.Promise;
 const { router: usersRouter } = require('./users');
 const { router: displayRouter } = require('./display/router');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+const {router: timeRouter} = require('./time');
 const { DATABASE_URL } = require('./config');
 
 const app = express();
@@ -57,6 +58,7 @@ passport.deserializeUser(function(user, done) { done(null, user);});
 
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
+app.use('/api/time/', timeRouter);
 app.use('/app/', displayRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });

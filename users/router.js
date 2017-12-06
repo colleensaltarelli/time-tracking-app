@@ -6,7 +6,7 @@ const passport = require('passport');
 
 mongoose.Promise = global.Promise;
 
-const {User} = require('./models');
+const {User, Time} = require('./models');
 const router = express.Router();
 const jsonParser = bodyParser.json();
 const jwtAuth = passport.authenticate('jwt', { session: false });
