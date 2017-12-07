@@ -24,8 +24,8 @@ router.use(bodyParser.json());
 router.post('/login', localAuth, (req, res) => {  
   console.log('req.user', req.user)
   const authToken = createAuthToken(req.user.apiRepr());
-  // res.json({authToken});
-  res.redirect('/app/timesheet')
+  res.json({authToken});
+  // res.redirect('/app/timesheet')
 });
 
 const jwtAuth = passport.authenticate('jwt', {session: false});

@@ -4,13 +4,6 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-const TimeSchema = mongoose.Schema({	
-	date: {type:Date, default: Date.now},
-  startTime: {type:Date, default: Date.now},
-  endTime: {type:Date, default: Date.now},
-	userRef: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
-});
-
 const UserSchema = mongoose.Schema({
   email: {
     type: String,
@@ -44,6 +37,5 @@ UserSchema.statics.hashPassword = (password) => {
 };
 
 const User = mongoose.model('User', UserSchema, 'user');
-const Time = mongoose.model('Time', TimeSchema, 'time');
 
-module.exports = {User, Time};
+module.exports = {User};

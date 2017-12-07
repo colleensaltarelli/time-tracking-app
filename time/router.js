@@ -7,13 +7,14 @@ const passport = require('passport');
 
 mongoose.Promise = global.Promise;
 
-const {User, Time} = require('../users/models');
+const {User} = require('../users/models');
+const {Time} = require('./models');
 const router = express.Router();
 const jsonParser = bodyParser.json();
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
 //add a new clock-in entry
-router.post('/new/clockin', jsonParser, jwtAuth, (req, res) => {
+router.post('/new/clockin', jsonParser, (req, res) => {
     Time
     .create({startTime: req.body.startTime})
     .then(time => res.status(201).json(time))
@@ -21,7 +22,7 @@ router.post('/new/clockin', jsonParser, jwtAuth, (req, res) => {
 });
 
 //add a new clock-out entry
-router.post('/new/clockout', jsonParser, jwtAuth, (req, res) => {
+router.post('/new/clockout', jsonParser, (req, res) => {
     Time
     .create({endTime: req.body.endTime})
     .then(time => res.status(201).json(time))

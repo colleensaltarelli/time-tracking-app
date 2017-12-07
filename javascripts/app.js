@@ -1,46 +1,31 @@
-console.log("I AM LOADED!");
-
-function displayClockIn(){
-    $('#clock-in-time').click(function(){
-       let time = moment().format('YYYY-MM-DDThh:mm:ss');
-       $('#clock-in-time-holder').val(time);  
-    });
-}
-    
-function displayClockOut(){
-    $('#clock-out-time').click(function(){
-       let time = moment().format('YYYY-MM-DDThh:mm:ss');
-       $('#clock-out-time-holder').val(time);  
-    });
-}
-
 function watchNewClockIn() {
-	$('#clockInOut').off().on('click', '#clock-in-time', event => {
-		event.preventDefault();
-		if($('#clockInOut').valid()) {
-		ccreateNewClockIn();
-		}
+	$('#clock-in-time').on('click', event => {
+        event.preventDefault();
+        const time = $(event.currentTarget).data('time')
+		newClockIn(time);
 	});
 }
 
-function renderClockIn() {
-    let time = moment().format('YYYY-MM-DDThh:mm:ss');
-	return `{ 
-				"startTime": "${$('#clock-in-time').val(time)}",
-				"userRef": "${localStorage.getItem('userId')}"	
-			}`
+function watchNewClockOut() {
+	$('#clock-out-time').on('click', event => {
+        event.preventDefault();
+        const time = $(event.currentTarget).data('time')
+		newClockOut(time);
+	});
 }
 
-function createNewClockIn() {
+function renderTime(data) {
+    console.log(data._id)
+    $('#clock-out-time').attr('data-id', data._id);
+}
+
+function newClockIn(inOrOut) {
 	$.ajax({
 		method: "POST",
-		url: '/api/time/new/clockin',
-		data: renderClockIn(),
+		url: `/api/time/new/${inOrOut}`,
 		contentType: "application/json; charset=utf-8",
 		dataType : "json",
-		success: function() {
-            //show new entry in timesheet table
-		},
+		success: renderTime,
 		beforeSend: function() { 
             //Authorization?
 		},
@@ -50,33 +35,13 @@ function createNewClockIn() {
 	});
 }
 
-function watchNewClockOut() {
-	$('#clockInOut').off().on('click', '#clock-out-time', event => {
-		event.preventDefault();
-		if($('#clockInOut').valid()) {
-		ccreateNewClockOut();
-		}
-	});
-}
-
-function renderClockOut() {
-    let time = moment().format('YYYY-MM-DDThh:mm:ss');
-	return `{ 
-				"endTime": "${$('#clock-out-time').val(time)}",
-				"userRef": "${localStorage.getItem('userId')}"	
-			}`
-}
-
-function createNewClockOut() {
+function newClockOut(inOrOut) {
 	$.ajax({
 		method: "POST",
-		url: '/api/time/new/clockout',
-		data: renderClockIn(),
+		url: `/api/time/new/${inOrOut}`,
 		contentType: "application/json; charset=utf-8",
 		dataType : "json",
-		success: function() {
-            //show new entry in timesheet table
-		},
+		success: renderTime,
 		beforeSend: function() { 
             //Authorization?
 		},
@@ -88,8 +53,6 @@ function createNewClockOut() {
 
 //function to watch for click event and run functions
 function watchSubmit() {
-    displayClockIn();
-    displayClockOut();
     watchNewClockIn();
     watchNewClockOut();
 }
