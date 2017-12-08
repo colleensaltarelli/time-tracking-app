@@ -124,14 +124,14 @@ router.post('/signup', jsonParser, (req, res) => {
     });
 });
 
-router.get('/', jwtAuth, (req, res) => {
+router.get('/', (req, res) => {
   return User.find()
     .then(users => res.json(users.map(user => user.apiRepr())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
 // request a single user by ID
-router.get('/:id', jwtAuth, (req, res) => {
+router.get('/:id', (req, res) => {
   User
   .findById(req.params.id)
   .then(users =>res.json(users.apiRepr()))

@@ -7,8 +7,16 @@ mongoose.Promise = global.Promise;
 const TimeSchema = mongoose.Schema({	
     startTime: {type:Date, default: Date.now},
     endTime: {type:Date},
-      userRef: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    userRef: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
   });
+
+  TimeSchema.methods.apiRepr = function () {
+    return {
+      startTime: this.startTime || null,
+      endTime: this.endTime || null,
+      userRef: this.userRef || ''
+    };
+  };
 
   const Time = mongoose.model('Time', TimeSchema, 'time');
   

@@ -9,28 +9,21 @@
     </header>
     <main>
     <form  name="clockInOut" id="clockInOut">
-        <label for="clock-in-time"></label>
-        <input type="datetime-local" value="" name="clock-in-time" id="clock-in-time-holder">
         <label for="clock-in-time-button"></label>
         <input type="button" value="Clock In" name="clock-in-time-button" data-time="clockin" id="clock-in-time">
-        <label for="clock-out-time"></label>
-        <input type="datetime-local" value="" name="clock-out-time" id="clock-out-time-holder">
         <label for="clock-out-time-button"></label>
         <input type="button" value="Clock Out" name="clock-out-time-button" data-time="clockout" id="clock-out-time">
     </form>
     <section>
         <h2>Timesheet</h2>
-        <table style="width:100%" id="timesheet-table">
-            <tr id="timesheet-table-headings">
-                <th>Date</th>
+        <table style="width:100%" id="timesheet-table-heading">
+            <tr>
                 <th>Clock In</th> 
                 <th>Clock Out</th>
             </tr>
-            <tr id="timesheet-table-entry">
-                <td>12/07/17</td>
-                <td>12:40pm</td> 
-                <td>5:00pm</td>
-            </tr>
+        </table>
+        <table style="width:100%" id="timesheet-table">    
+
         </table>
     </section>
     </main>

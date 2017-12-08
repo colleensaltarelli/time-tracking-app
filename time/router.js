@@ -14,18 +14,25 @@ const jsonParser = bodyParser.json();
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
 //add a new clock-in entry
-router.post('/new/clockin', jsonParser, (req, res) => {
+router.post('/clockin', jsonParser, (req, res) => {
     Time
-    .create({startTime: req.body.startTime})
+    .create({})
     .then(time => res.status(201).json(time))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
 //add a new clock-out entry
-router.post('/new/clockout', jsonParser, (req, res) => {
-    Time
-    .create({endTime: req.body.endTime})
+router.post('/clockout', jsonParser, (req, res) => {
+    Time.findById(req.body.id)
+    .update({endTime: Date.now()})
     .then(time => res.status(201).json(time))
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+
+// get a list of all time entries for the user
+router.get('/entries', jsonParser, (req, res) => {
+    Time.find()
+    .then(entries => res.json(entries.map(entry => entry.apiRepr())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
