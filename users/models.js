@@ -24,6 +24,7 @@ UserSchema.methods.apiRepr = function () {
     email: this.email || '',
     firstName: this.firstName || '',
     lastName: this.lastName || '',
+    _id: this._id,
     admin: this.admin || false
   };
 };

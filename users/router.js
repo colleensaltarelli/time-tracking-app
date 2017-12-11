@@ -131,9 +131,34 @@ router.get('/', (req, res) => {
 });
 
 // request a single user by ID
-router.get('/:id', (req, res) => {
+router.get('/account', jwtAuth, (req, res) => {
+  User.find({_id: req.user._id})
+  .then(user => res.json(user[0].apiRepr()))
+  .catch(err => {
+    console.error(err);
+      res.status(500).json({message: 'Internal server error'})
+  });
+});
+
+router.get('/all-users', jwtAuth, (req, res) => {
+  console.log('hit all-users route');
+  if (!req.user.admin) {
+    return res.send('you are not admin')
+  }
+  else {
+    User.find({})
+    .then(users => res.json(users.map(user => user.apiRepr())))
+    .catch(err => {
+      console.error(err);
+        res.status(500).json({message: 'Internal server error'})
+    });
+  }
+});
+
+// request a single user by ID
+router.get('/:id', jwtAuth, (req, res) => {
   User
-  .findById(req.params.id)
+  .find({userRef: req.user._id})
   .then(users =>res.json(users.apiRepr()))
   .catch(err => {
     console.error(err);
@@ -149,6 +174,29 @@ router.delete('/:id', jwtAuth, (req, res) => {
 });
 
 router.put('/:id', jwtAuth, (req, res) => {
+  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    const message = (
+      `Request path id (${req.params.id}) and request body id ` +
+      `(${req.body.id}) must match`);
+    console.error(message);
+    return res.status(400).json({message: message});
+  }
+  const toUpdate = {};
+  const updateableFields = ['email', 'password', 'firstName', 'lastName'];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      toUpdate[field] = req.body[field];
+    }
+  });
+  User
+    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
+    .then(user => res.status(200).end())
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+
+router.put('/', jwtAuth, jsonParser, (req, res) => {
+  console.log('req.body', req.body)
+  // 
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
       `Request path id (${req.params.id}) and request body id ` +

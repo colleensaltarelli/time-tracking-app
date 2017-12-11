@@ -13,6 +13,7 @@ const localStrategy = new LocalStrategy({
   passwordField: 'password'
 },
 function(email, password, callback) {
+  console.log('inside auth strategy')
   User.findOne({ email: email })
     .then(_user => {
       user = _user;

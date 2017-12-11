@@ -1,137 +1,88 @@
 //User signup and login
 
-//User timesheet, clock in and clock out functionality
-
-function watchNewClockIn() {
-	$('#clock-in-time').on('click', event => {
-        event.preventDefault();
-		newClockIn();
-	});
-}
-
-function watchNewClockOut() {
-	$('#clock-out-time').on('click', event => {
-        event.preventDefault();
-		newClockOut();
-	});
-}
-
-function setDataId(data) {
-	$('#clock-in-time').prop('disabled', 'disabled');
-	$('#clock-out-time').attr('data-id', data._id);
-}
-
-function enableClockIn() {
-	$('#clock-in-time').removeAttr("disabled");
-}
-
-function renderTimeEntries(data) {
-	return data.reduce((output, entry) => {
-		return output + `
-			<tr class="timesheet-table-entry">
-				<td>${entry.startTime}</td> 
-				<td>${entry.endTime}</td>
-			</tr>
-		`;
-	});
-}
-
-function displayTimeEntries(data) {
-    $('#timesheet-table').html(renderTimeEntries(data));	
-}
-
-function newClockIn() {
-	$.ajax({
-		method: "POST",
-		url: '/api/time/clockin',
-		contentType: "application/json; charset=utf-8",
-		dataType : "json",
-		success: function(data) {
-			setDataId(data);
-			getEntries(data);
-		},
-		beforeSend: function() { 
-            //Authorization?
-		},
-		error: function() {
-  			//alert(err.Message);
+function watchSignUp() {
+	$('#signup-form').submit( event => {
+		event.preventDefault();
+		const newUser={
+			firstName: $('#signup-firstname').val(),
+			lastName: $('#signup-lastname').val(),
+			email: $('#signup-email').val(),
+			password: $('#signup-password').val()
 		}
-	});
+		let emailSignUp = $('#signup-email');
+		localStorage.setItem("email", emailSignUp.val());
+		$.ajax({
+			method: "POST",
+			url: '/api/users/signup',
+			data: JSON.stringify(newUser),
+			contentType: "application/json; charset=utf-8",
+			dataType : "json",
+			success: function(data) {
+				localStorage.setItem('userId', data._id);
+				loginAfterUserCreated();
+			},
+			error: function(data) {
+				console.log("Error: API could not create a new user.");
+				alert(data.responseJSON.location + " error: " + data.responseJSON.message);
+			}
+		});
+
+	})
 }
 
-function newClockOut() {
+function renderNewUserLogin() {
+	return `{
+		"email": "${$('#signup-email').val()}",
+		"password": "${$('#signup-password').val()}"
+	}`;
+}
+
+function loginAfterUserCreated() {
 	$.ajax({
-		method: "POST",
-		url: `/api/time/clockout`,
-		data: JSON.stringify({ id: $('#clock-out-time').attr('data-id') }),
-		contentType: "application/json; charset=utf-8",
-		dataType : "json",
-		success: function(data) { 
-			getEntries(data);
-			enableClockIn(data);
-		},
-		beforeSend: function() { 
-            //Authorization?
-		},
-		error: function() {
-  			//alert(err.Message);
+			method: "POST",
+			url: '/api/auth/login/',
+			data: renderNewUserLogin(),
+			contentType: "application/json; charset=utf-8",
+			dataType : "json",
+			success: function(data) {
+				localStorage.setItem('authToken', data.authToken);	
+				window.location.replace('/app/timesheet')
+			},
+			error: function(xhr, status, error) {
+					  alert('Something went wrong');
+			}
+		});
+	}
+
+function watchLogIn() {
+	$('#login-form').submit( event => {
+		event.preventDefault();
+		const user={
+			email: $('#login-email').val(),
+			password: $('#login-password').val()
 		}
-	});
-}
+		$.ajax({
+			method: "POST",
+			url: '/api/auth/login',
+			data: JSON.stringify(user),
+			contentType: "application/json; charset=utf-8",
+			dataType : "json",
+			success: function(data) {
+				// set the token in local storage
+				localStorage.setItem("authToken", data.authToken);
+				// redirect user to /timesheet
+				window.location.replace('/app/timesheet')
+			},
+			beforeSend: function() { 
+				//Authorization?
+			},
+			error: function() {
+				  //alert(err.Message);
+				  // need 
+			}
+		});
 
-function getEntries() {
-	$.ajax({
-		method: "GET",
-		url: `/api/time/entries`,
-		contentType: "application/json; charset=utf-8",
-		dataType : "json",
-		success: displayTimeEntries,
-		beforeSend: function() { 
-            //Authorization?
-		},
-		error: function() {
-  			//alert(err.Message);
-		}
-	});
-}
-
-//User account page render edit and delete functionality
-
-function renderAccountInfo(data) {
-	return `
-	<label for="firstName">First Name</label>
-    <input type="text" name="firstName" value="${data.firstNAme}">
-
-    <label for="lastName">Last Name</label>
-    <input type="text" name="lastName" value="${data.lastNAme}">
-
-    <label for="email">Email</label>
-    <input type="text" name="email" value="${data.email}">
-
-	<input id="save-user-info-button" type="submit" class="btn" value="Save">
-	<input id="delete-user-info-button" type="submit" class="btn" value="Delete">
-	`;
-}
-
-function displayAccountInfo(data) {
-    $('#edit-user-form').html(renderAccountInfo(data));	
-}
-
-function getAccountInfo() {
-	$.ajax({
-		method: "GET",
-		url: `/api/users/:id`,
-		data: JSON.stringify({ id: $('#clock-out-time').attr('data-id') }),		
-		contentType: "application/json; charset=utf-8",
-		dataType : "json",
-		success: displayAccountInfo,
-		beforeSend: function() { 
-            //Authorization?
-		},
-		error: function() {
-  			//alert(err.Message);
-		}
-	});
+	})
 }
 
 //Admin page render functionality
@@ -146,35 +97,36 @@ function renderAdmin(data) {
 				<td><button type="button" class="admin-account-edit-button">Edit</button></td>
 			</tr>	
 		`;
-	});
+	   }, '');
 }
 
 function displayAdmin(data) {
-    $('#employee-table').html(renderAdmin(data));	
+	$('#employee-table').html(renderAdmin(data));	
+	console.log('display data', data)
 }
 
 function getEmployees() {
+	const authToken=localStorage.getItem("authToken");    
 	$.ajax({
 		method: "GET",
-		url: `/api/users/`,
+		url: `/api/users/all-users`,
 		contentType: "application/json; charset=utf-8",
 		dataType : "json",
 		success: displayAdmin,
-		beforeSend: function() { 
-            //Authorization?
+		beforeSend: function(xhr) { 
+            xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);            
 		},
-		error: function() {
-  			//alert(err.Message);
-		}
+		error: function(xhr, status, error) {
+			// console.log('Something went wrong');
+			// console.log(xhr);
+ 		 }
 	});
 }
 
-function watchSubmit() {
-	watchNewClockIn();
-	watchNewClockOut();
-	getEntries();
+function watchAppSubmit() {
+	watchSignUp();
+	watchLogIn();
 	getEmployees();
-	getAccountInfo();
 }
 
-$(watchSubmit);
+$(watchAppSubmit);

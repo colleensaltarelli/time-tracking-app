@@ -9,10 +9,8 @@
     </header>
     <main>
     <form  name="clockInOut" id="clockInOut">
-        <label for="clock-in-time-button"></label>
-        <input type="button" value="Clock In" name="clock-in-time-button" data-time="clockin" id="clock-in-time">
-        <label for="clock-out-time-button"></label>
-        <input type="button" value="Clock Out" name="clock-out-time-button" data-time="clockout" id="clock-out-time">
+        <button value="Clock In" data-time="clockin" id="clock-in-time">Clock In</button>
+        <button value="Clock Out" data-time="clockout" id="clock-out-time">Clock Out</button>
     </form>
     <section>
         <h2>Timesheet</h2>
@@ -28,5 +26,6 @@
     </section>
     </main>
 <% include ../partials/footer %>
+<script src="/javascripts/timesheet.js"></script>
 </body>
 </html>

@@ -14,9 +14,10 @@ const jsonParser = bodyParser.json();
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
 //add a new clock-in entry
-router.post('/clockin', jsonParser, (req, res) => {
+router.post('/clockin', jsonParser, jwtAuth, (req, res) => {
+    console.log('req.user', req.user)
     Time
-    .create({})
+    .create({userRef: req.user._id})
     .then(time => res.status(201).json(time))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
@@ -30,8 +31,9 @@ router.post('/clockout', jsonParser, (req, res) => {
 });
 
 // get a list of all time entries for the user
-router.get('/entries', jsonParser, (req, res) => {
-    Time.find()
+router.get('/entries', jwtAuth, jsonParser, (req, res) => {
+    // console.log('req.user', req.user)
+    Time.find({userRef: req.user._id})
     .then(entries => res.json(entries.map(entry => entry.apiRepr())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
