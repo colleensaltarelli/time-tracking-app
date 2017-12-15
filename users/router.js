@@ -124,6 +124,12 @@ router.post('/signup', jsonParser, (req, res) => {
     });
 });
 
+router.get('/logout', jwtAuth, (req, res) => {
+  console.log('hitting log out route');
+  req.logout();
+  res.json({ok:true});
+});
+
 router.get('/', (req, res) => {
   return User.find()
     .then(users => res.json(users.map(user => user.apiRepr())))
@@ -143,7 +149,7 @@ router.get('/account', jwtAuth, (req, res) => {
 router.get('/all-users', jwtAuth, (req, res) => {
   console.log('hit all-users route');
   if (!req.user.admin) {
-    return res.send('you are not admin')
+    return res.send('you are not admin').status(401);
   }
   else {
     User.find({})
@@ -166,13 +172,28 @@ router.get('/:id', jwtAuth, (req, res) => {
   });
 });
 
+// an admin to delete another users account
 router.delete('/:id', jwtAuth, (req, res) => {
+  if (!req.user.admin) {
+    return res.send('you are not admin').status(401);
+  }
+  else {
+    User
+    .findByIdAndRemove({_id: req.user._id})
+    .then(user => res.status(204).end())
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+  }
+});
+
+// a user to delete their own account
+router.delete('/', jwtAuth, (req, res) => {
   User
-  .findByIdAndRemove(req.params.id)
+  .findByIdAndRemove({_id: req.user._id})
   .then(user => res.status(204).end())
   .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
+// an admn to update another users account info
 router.put('/:id', jwtAuth, (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     const message = (
@@ -194,26 +215,19 @@ router.put('/:id', jwtAuth, (req, res) => {
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
+// a user to update their own account info
 router.put('/', jwtAuth, jsonParser, (req, res) => {
   console.log('req.body', req.body)
-  // 
-  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-    const message = (
-      `Request path id (${req.params.id}) and request body id ` +
-      `(${req.body.id}) must match`);
-    console.error(message);
-    return res.status(400).json({message: message});
-  }
   const toUpdate = {};
-  const updateableFields = ['email', 'password', 'firstName', 'lastName'];
+  const updateableFields = ['email', 'firstName', 'lastName'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       toUpdate[field] = req.body[field];
     }
   });
   User
-    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
-    .then(user => res.status(200).end())
+    .findByIdAndUpdate(req.user._id, {$set: toUpdate})
+    .then(user => res.json({user: user => user.apiRepr()}).end())
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 

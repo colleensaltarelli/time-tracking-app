@@ -96,7 +96,6 @@ function getEntries() {
 	});
 }
 
-
 function watchTimeSubmit() {
 	watchNewClockIn();
 	watchNewClockOut();
