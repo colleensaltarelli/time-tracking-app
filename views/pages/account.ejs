@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <% include ../partials/head %>
 </head>
+
 <body class="container">
 
-<header>
-    <% include ../partials/header %>
-</header>
+    <header>
+        <% include ../partials/header-logout %>
+    </header>
 
-<main>
-    <h2>Account Information</h2>
-    <form name="edit-user" id="edit-user-form" >
+    <main class="account-page">
+        <div id="account-form-holder">
+            <h2>Account Information</h2>
+            <form name="edit-user" id="edit-user-form">
 
-    </form> 
-</main>
+            </form>
+        </div>
+    </main>
 
-<% include ../partials/footer %>
-<script src="/javascripts/account.js"></script>
+    <% include ../partials/footer %>
+        <script src="/javascripts/account.js"></script>
 </body>
+
 </html>

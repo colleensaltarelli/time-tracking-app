@@ -1,11 +1,459 @@
+/* global styles */
 
-h1, h2, h3, h4, h5 {
-    font-family: sans-serif;
-    color: red;
+body {
+    background: url("../images/hero.jpg") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
-p, a, span, ul, li, .btn {
-    font-family: sans-serif;
+main {
+    flex: 1;
+}
+
+h1, h2, h3, h4, h5 {
+    color: #302727;
+    font-family: 'Quattrocento Sans', sans-serif;
+}
+
+p, a, span, ul, li, .btn, input, tr {
     text-decoration: none;
-    color: green;
+    color: #302727;
+    font-family: 'Quattrocento Sans', sans-serif;
+}
+
+button {
+    background-color: #6F4F4F;
+    border: 4px solid #FAF3EB;
+    border-radius: 20px;
+    color:  #FAF3EB;
+    font-size: 16px;
+    text-transform: lowercase;
+    padding: 10px 20px;
+    min-width: 120px;
+}
+
+button:hover {
+    background-color: #FAF3EB;
+    border: 4px solid #6F4F4F;
+    border-radius: 20px;
+    color: #6F4F4F;
+    font-size: 16px;
+    text-transform: lowercase;
+    padding: 10px 20px;
+    min-width: 120px;
+}
+
+.btn {
+    background-color: #6F4F4F;
+    border: 4px solid #FAF3EB;
+    border-radius: 20px;
+    color:  #FAF3EB;
+    font-size: 16px;
+    text-transform: lowercase;
+    padding: 10px 20px;
+    min-width: 120px;
+}
+
+.btn:hover {
+    background-color: #FAF3EB;
+    border: 4px solid #6F4F4F;
+    border-radius: 20px;
+    color: #6F4F4F;
+    font-size: 16px;
+    text-transform: lowercase;
+    padding: 10px 20px;
+    min-width: 120px;
+}
+
+button:disabled {
+    background-color: #999595;
+    border: 4px solid #BCADAD;
+    border-radius: 20px;
+    color: #BCADAD;
+    font-size: 16px;
+    text-transform: lowercase;
+    padding: 10px 20px;
+    min-width: 120px; 
+}
+
+.btn-reverse {
+    background-color: #FAF3EB;
+    border: 4px solid #6F4F4F;
+    border-radius: 20px;
+    color:  #6F4F4F;
+    font-size: 16px;
+    text-transform: lowercase;
+    padding: 10px 20px;
+    min-width: 120px;
+    outline: none;
+}
+
+.btn-reverse:hover {
+    background-color: #6F4F4F;
+    border: 4px solid #6F4F4F;
+    border-radius: 20px;
+    color: #FAF3EB;
+    font-size: 16px;
+    text-transform: lowercase;
+    padding: 10px 20px;
+    min-width: 120px;
+    outline: none;
+
+}
+
+.logout-holder {
+    text-align: right;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+footer {
+    width: 100%; 
+    background: transparent;
+    text-align: right;
+ }
+
+ footer p {
+    color: #FAF3EB;
+ }
+
+/* navigation */
+
+.logo-side {
+    margin-top: 15px;
+}
+
+.logo-side a:hover {
+    color: #EAC9AC;
+}
+
+.navbar-brand {
+    color: #FAF3EB;
+    font-size: 1.5rem;
+}
+
+.menu-side a {
+    color: #FAF3EB;
+    margin-left: 15px;
+}
+
+.menu-side a:hover {
+    color: #EAC9AC;
+}
+
+.navbar ul {
+    text-align: right;
+}
+
+.navbar li {
+    list-style: none;
+    display: inline-block;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 700px){
+    .logo-side {
+        text-align: center;
+    }
+
+    .navbar ul {
+        text-align: center;
+    }
+
+    .navbar ul li {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .menu-side a {
+        margin-left: 0;
+    }
+
+    ul.nav.navbar-nav {
+        padding-left: 0;
+    }
+}
+
+/* homepage */
+
+.homepage h1 {
+    text-align: right;
+    color: #FAF3EB;
+    margin-top: 180px;
+    font-size: 2.5rem;
+}
+
+.homepage h4 {
+    text-align: right;
+    color: #FAF3EB;
+    font-size: 1.1rem;
+    margin-top: 0;
+    padding-left: 300px;
+}
+
+.homepage .btn {
+    margin-top: 30px;
+    float: right;
+    font-weight: bold;
+    font-family: 'Quattrocento Sans', sans-serif;
+    margin-bottom: 60px;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 700px){
+    .homepage h4 {
+        padding-left: 0;
+    }
+}
+
+/* signup */
+
+.signup-page #signup-form-holder {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    padding: 10px 30px;
+    background-color: #FAF3EB;
+    border: 4px solid #6F4F4F;
+    border-radius: 20px;
+    margin-top: 60px;
+}
+
+.signup-page #signup-form-holder h2 {
+    text-align: center;
+    color: #6F4F4F;
+}
+
+.signup-page #signup-form-holder input[type="text"] {
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 20px;
+}
+.signup-page #signup-form-holder input[type="password"] {
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 20px;
+}
+
+.signup-page #signup-form-holder input[type="text"]:focus {
+    outline: none;
+}
+
+.signup-page #signup-form-holder input[type="password"]:focus {
+    outline: none;
+}
+
+.signup-page #signup-form-holder p {
+    text-align: center;
+    color: #6F4F4F;
+    margin-top: 30px;
+}
+
+.signup-page #signup-form-holder p a {
+    color: #1897A2;
+}
+
+.signup-page #signup-form-holder p a:hover {
+    color: #6F4F4F;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 700px){
+    .signup-page #signup-form-holder {
+        width: auto;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
+/* login */
+
+.login-page #login-form-holder {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    padding: 10px 30px;
+    background-color: #FAF3EB;
+    border: 4px solid #6F4F4F;
+    border-radius: 20px;
+    margin-top: 60px;
+    outline: none;
+}
+
+.login-page #login-form-holder h2 {
+    text-align: center;
+    color: #6F4F4F;
+}
+
+.login-page #login-form-holder input[type="text"] {
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 20px;
+}
+
+.login-page #login-form-holder input[type="password"] {
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 20px;
+}
+
+.login-page #login-form-holder input[type="text"]:focus {
+    outline: none;
+}
+
+.login-page #login-form-holder input[type="password"]:focus {
+    outline: none;
+}
+
+.login-page #login-form-holder p {
+    text-align: center;
+    color: #6F4F4F;
+    margin-top: 30px;
+}
+
+.login-page #login-form-holderp a {
+    color: #1897A2;
+}
+
+.login-page #login-form-holder p a:hover {
+    color: #6F4F4F;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 700px){
+    .login-page #login-form-holder {
+        width: auto;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
+
+/* timesheet */
+
+.timesheet-page .timesheet-holder {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 550px;
+    padding: 10px 30px 30px 30px;
+    background-color: #FAF3EB;
+    border: 4px solid #6F4F4F;
+    border-radius: 20px;
+    margin-top: 60px;
+}
+
+
+.timesheet-page .clock-buttons {
+    text-align: center;
+}
+
+.timesheet-page .clock-buttons button {
+    display: inline-block;
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
+.timesheet-page h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.timesheet-page .timesheet-holder #timesheet-table td {
+    text-align: center;
+}
+
+.timesheet-page .timesheet-holder th {
+    padding-bottom: 15px;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 700px){
+    .timesheet-page .timesheet-holder {
+        width: 400px;
+    }
+}
+
+/* admin */
+
+body.admin {
+    background: none;
+    background-size: cover;
+    background-color: #1897A2;
+    position: relative;
+}
+
+.admin h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.admin #employee-table tr {
+    text-align: center;
+}
+
+.admin table {
+    border-collapse: collapse;
+    border-bottom: 1px solid #FAF3EB;
+}
+
+.admin #employee-table th{
+    border-bottom: 1px solid #FAF3EB;
+}
+
+.admin #employee-table th {
+    height: 50px;
+    font-size: 1.2rem;
+}
+
+.admin #employee-table td {
+    height: 70px;
+    font-size: 1.1rem;
+}
+
+/* account page */
+
+.account-page #account-form-holder {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    padding: 10px 30px 30px 30px;
+    background-color: #FAF3EB;
+    border: 4px solid #6F4F4F;
+    border-radius: 20px;
+    margin-top: 60px;
+}
+
+.account-page #account-form-holder h2 {
+    text-align: center;
+    color: #6F4F4F;
+}
+
+.account-page #account-form-holder input[type="text"] {
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 700px){
+    .account-page #account-form-holder {
+        width: auto;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
 }

@@ -2,13 +2,13 @@
 
 function renderAccountInfo(data) {
 	return `
-	<label for="firstName">First Name</label>
+	<label for="firstName"></label>
     <input type="text" name="firstName" id="account-first-name" value=${data.firstName}>
 
-    <label for="lastName">Last Name</label>
-    <input type="text" name="lastName" id="account-last-name" value=${data.lastName}>
+    <label for="lastName"></label>
+    <input type="text"  name="lastName" id="account-last-name" value=${data.lastName}>
 
-    <label for="email">Email</label>
+    <label for="email"></label>
     <input type="text" name="email" id="account-email" value=${data.email}>
 
 	<button id="save-user-info-button" type="submit" class="btn" value="Save">Save</button>
@@ -21,10 +21,12 @@ function displayAccountInfo(data) {
 }
 
 function getAccountInfo() {
-	const authToken=localStorage.getItem("authToken");    
+	const authToken=localStorage.getItem("authToken");  
+	const userID=localStorage.getItem("userID");  
+
 	$.ajax({
 		method: "GET",
-		url: `/api/users/account`,
+		url: `/api/users/account/${userID}`,
 		contentType: "application/json; charset=utf-8",
 		dataType : "json",
 		beforeSend: function(xhr) { 

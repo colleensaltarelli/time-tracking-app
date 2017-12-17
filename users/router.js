@@ -136,9 +136,30 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-// request a single user by ID
+//check if user is admin 
+router.get('/is-admin', jwtAuth, (req, res) => {
+  if (!req.user.admin) {
+    return res.send('you are not admin').status(401);
+  }
+  else {
+    res.status(204).end()
+  }
+})
+
+// request a single user by their own ID
 router.get('/account', jwtAuth, (req, res) => {
   User.find({_id: req.user._id})
+  .then(user => res.json(user[0].apiRepr()))
+  .catch(err => {
+    console.error(err);
+      res.status(500).json({message: 'Internal server error'})
+  });
+});
+
+// request a single user by any users ID
+router.get('/account/:id',  (req, res) => {
+  console.log('hitting account/id route');
+  User.find({_id: req.params.id})
   .then(user => res.json(user[0].apiRepr()))
   .catch(err => {
     console.error(err);

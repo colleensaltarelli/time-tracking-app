@@ -70,7 +70,10 @@ function watchLogIn() {
 			success: function(data) {
 				// set the token in local storage
 				localStorage.setItem("authToken", data.authToken);
-				// redirect user to /timesheet
+
+				// if admin redirect user to /admin
+
+				// if not admin redirect user to /timesheet
 				window.location.replace('/app/timesheet')
 			},
 			error: function() {

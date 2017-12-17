@@ -41,6 +41,7 @@ app.set('view engine', 'ejs');
 // declare ejs static files
 app.use("/stylesheets", express.static(__dirname + "/stylesheets"));
 app.use("/javascripts", express.static(__dirname + "/javascripts"));
+app.use("/images", express.static(__dirname + "/images"));
 app.use(session({
   secret: 'keyboard cat',
   resave: false,

@@ -9,29 +9,26 @@
     <% include ../partials/header %>
 </header>
 
-<main>
-
-<p>sign up</p>
-
+<main class="signup-page">
+<div id="signup-form-holder">
+<h2>sign up</h2>
 <form name="signUp" id="signup-form" >
-    
-    <label for="firstName">First Name</label>
-    <input type="text" name="firstName" id="signup-firstname" value="Minnie">
+    <label for="firstName"></label>
+    <input type="text" name="firstName" placeholder="first name" id="signup-firstname" >
 
-    <label for="lastName">Last Name</label>
-    <input type="text" name="lastName" id="signup-lastname" value="Mouse">
+    <label for="lastName"></label>
+    <input type="text" name="lastName" placeholder="last name" id="signup-lastname">
 
-    <label for="email">Email</label>
-    <input type="text" name="email" id="signup-email" value="Minnie@mouse.com">
+    <label for="email"></label>
+    <input type="text" name="email" placeholder="email" id="signup-email">
 
-    <label for="password">Password</label>
-    <input type="text" name="password" id="signup-password" value="MinnieMouse123">
+    <label for="password"></label>
+    <input type="password" name="password" placeholder="password" id="signup-password">
 
-    <input id="signup-button" type="submit" class="btn" value="Submit">
+    <input id="signup-button" type="submit" class="btn-reverse" value="Submit">
     <p class="login-message">Already have an account? <a href="/login" id="logInLink">Login</a></p>
-
   </form> 
-
+</div>
 </main>
 
 <% include ../partials/footer %>

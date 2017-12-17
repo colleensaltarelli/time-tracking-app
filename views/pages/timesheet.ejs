@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <% include ../partials/head %>
 </head>
+
 <body class="container">
     <header>
-        <% include ../partials/header %>
+        <% include ../partials/header-logout %>
     </header>
-    <main>
-    <form  name="clockInOut" id="clockInOut">
-        <button value="Clock In" data-time="clockin" id="clock-in-time">Clock In</button>
-        <button value="Clock Out" data-time="clockout" id="clock-out-time">Clock Out</button>
-    </form>
-    <section>
-        <h2>Timesheet</h2>
-        <table style="width:100%" id="timesheet-table-heading">
-            <tr>
-                <th>Clock In</th> 
-                <th>Clock Out</th>
-            </tr>
-        </table>
-        <table style="width:100%" id="timesheet-table">    
+    <main class="timesheet-page">
+        <div class="timesheet-holder">
+            <form name="clockInOut" id="clockInOut">
+                <h2>time clock</h2>
+                <div class="clock-buttons">
+                    <button value="Clock In" data-time="clockin" id="clock-in-time">Clock In</button>
+                    <button value="Clock Out" data-time="clockout" id="clock-out-time">Clock Out</button>
+                </div>
+            </form>
+        </div>
+        <div class="timesheet-holder">
+            <section>
+                <h2>time sheet</h2>
+                <table style="width:100%" id="timesheet-table">
 
-        </table>
-    </section>
+                </table>
+            </section>
+        </div>
+        <div class="row">
+            <div class="col-12 logout-holder">
+            </div>
+        </div>
     </main>
-<% include ../partials/footer %>
-<script src="/javascripts/timesheet.js"></script>
+    <% include ../partials/footer %>
+        <script src="/javascripts/timesheet.js"></script>
 </body>
+
 </html>

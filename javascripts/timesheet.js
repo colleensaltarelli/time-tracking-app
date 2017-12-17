@@ -24,7 +24,10 @@ function enableClockIn() {
 }
 
 function renderTimeEntries(data) {
-	return data.reduce((output, entry) => {
+	return `                    <tr>
+	<th>clock in</th>
+	<th>clock out</th>
+</tr>` + data.reduce((output, entry) => {
 		return output + `
 			<tr class="timesheet-table-entry">
 				<td>${entry.startTime}</td> 
@@ -35,7 +38,7 @@ function renderTimeEntries(data) {
 }
 
 function displayTimeEntries(data) {
-    $('#timesheet-table').html(renderTimeEntries(data));	
+    $('#timesheet-table').html(renderTimeEntries(data.reverse()));	
 }
 
 function newClockIn() {

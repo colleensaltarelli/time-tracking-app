@@ -63,6 +63,10 @@
     .col-8 {
         width: 75%;
       }
+
+    .col-10 {
+      width: 83%;
+    }
     
     .col-12 {
       width: 100%;

@@ -2,31 +2,30 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <% include ../partials/head %>
 </head>
-<body class="container">
 
-<header>
-    <% include ../partials/header %>
-</header>
-
-<main>
-
-    <h2>Employees</h2>
-    <table style="width:100%" id="employee-table-heading">
-        <tr>
-            <th>First Name</th> 
-            <th>Last Name</th>
-            <th>Timesheet</th>
-            <th>Account</th>
-        </tr>
-    </table>
-    <table style="width:100%" id="employee-table">
-
-    </table>
-</main>
-<% include ../partials/footer %>
-<script src="/javascripts/admin.js"></script>
+<body class="container admin">
+    <header>
+        <% include ../partials/header-logout %>
+    </header>
+    <main>
+        <div class="row">
+            <div class="col-12">
+                <h2>Employees</h2>
+                <table style="width:100%" id="employee-table">
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 logout-holder">
+            </div>
+        </div>
+    </main>
+    <% include ../partials/footer %>
+        <script src="/javascripts/admin.js"></script>
 </body>
+
 </html>

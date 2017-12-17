@@ -7,7 +7,6 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 
 // timesheet page 
 router.get('/timesheet/', function(req, res) {
-  console.log('req.user timesheet', req.user)
   res.render('pages/timesheet');
 });
 
