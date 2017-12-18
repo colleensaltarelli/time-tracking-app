@@ -22,8 +22,7 @@ function displayAccountInfo(data) {
 
 function getAccountInfo() {
 	const authToken=localStorage.getItem("authToken");  
-	const userID=localStorage.getItem("userID");  
-
+	const userID=localStorage.getItem("userId");   
 	$.ajax({
 		method: "GET",
 		url: `/api/users/account/${userID}`,
@@ -48,6 +47,7 @@ function updateAccountInfo() {
 		event.preventDefault();
 		console.log('click save button');
 		const authToken=localStorage.getItem("authToken"); 
+		const userID=localStorage.getItem("userID");   
 		const user={
 			firstName: $('#account-first-name').val(),
 			lastName: $('#account-last-name').val(),
@@ -56,7 +56,7 @@ function updateAccountInfo() {
 		console.log(user);
 		$.ajax({
 			method: "PUT",
-			url: `/api/users/`,
+			url: `/api/users/${userID}`,
 			contentType: "application/json; charset=utf-8",
 			dataType : "json",
 			data: JSON.stringify(user),
@@ -65,7 +65,7 @@ function updateAccountInfo() {
 			},
 			success: function(data) {
 				getAccountInfo(data);
-
+				console.log('data working', data);
 			},
 			error: function(xhr, status, error) {
 				console.log('Something went wrong');

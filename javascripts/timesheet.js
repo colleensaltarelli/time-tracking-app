@@ -24,14 +24,15 @@ function enableClockIn() {
 }
 
 function renderTimeEntries(data) {
-	return `                    <tr>
+	return `                    
+	<tr>
 	<th>clock in</th>
 	<th>clock out</th>
-</tr>` + data.reduce((output, entry) => {
+	</tr>` + data.reduce((output, entry) => {
 		return output + `
 			<tr class="timesheet-table-entry">
-				<td>${entry.startTime}</td> 
-				<td>${entry.endTime}</td>
+				<td class="timesheet-time">${formatTime(entry.startTime)}</td> 
+				<td class="timesheet-time">${formatTime(entry.endTime)}</td>
 			</tr>
 		`;
 	}, '');
@@ -39,6 +40,10 @@ function renderTimeEntries(data) {
 
 function displayTimeEntries(data) {
     $('#timesheet-table').html(renderTimeEntries(data.reverse()));	
+}
+
+function formatTime(time) {
+	return moment(time).format("MMM Do YYYY, h:mm:ss a");
 }
 
 function newClockIn() {
@@ -50,6 +55,7 @@ function newClockIn() {
 		dataType : "json",
 		success: function(data) {
 			setDataId(data);
+			// convertTime(data);
 			getEntries(data);
 		},
 		beforeSend: function(xhr) { 
@@ -71,6 +77,7 @@ function newClockOut() {
 		dataType : "json",
 		success: function(data) { 
 			getEntries(data);
+			// convertTime(data);
 			enableClockIn(data);
 		},
 		beforeSend: function(xhr) { 

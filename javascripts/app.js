@@ -101,6 +101,7 @@ function watchLogOut() {
 		},
 		success: function() {
 			localStorage.removeItem("authToken");
+			localStorage.removeItem("userID");
 			window.location.replace('/login')
 		},
 		error: function() {

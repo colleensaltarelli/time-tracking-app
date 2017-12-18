@@ -119,6 +119,20 @@ footer {
     color: #FAF3EB;
  }
 
+ footer span.pole {
+    color: #FAF3EB;
+    margin-left: 15px;
+    margin-right: 15px;
+ }
+
+ footer p a {
+    color: #EAC9AC;
+ }
+
+ footer p a:hover {
+    color: #FAF3EB;
+ }
+
 /* navigation */
 
 .logo-side {
