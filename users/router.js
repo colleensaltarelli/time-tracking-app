@@ -13,7 +13,6 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 
 // Post to register a new user
 router.post('/signup', jsonParser, (req, res) => {
-  console.log(req.body);
   const requiredFields = ['firstName', 'lastName', 'email', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
@@ -125,7 +124,6 @@ router.post('/signup', jsonParser, (req, res) => {
 });
 
 router.get('/logout', jwtAuth, (req, res) => {
-  console.log('hitting log out route');
   req.logout();
   res.json({ok:true});
 });
@@ -158,8 +156,6 @@ router.get('/account', jwtAuth, (req, res) => {
 
 // request a single user by any users ID
 router.get('/account/:id',  (req, res) => {
-  console.log('hitting account/id route');
-  console.log(req.params.id);
   User.find({_id: req.params.id})
   .then(user => res.json(user[0].apiRepr()))
   .catch(err => {
@@ -169,7 +165,6 @@ router.get('/account/:id',  (req, res) => {
 });
 
 router.get('/all-users', jwtAuth, (req, res) => {
-  console.log('hit all-users route');
   if (!req.user.admin) {
     return res.send('you are not admin').status(401);
   }
@@ -201,8 +196,8 @@ router.delete('/:id', jwtAuth, (req, res) => {
   }
   else {
     User
-    .findByIdAndRemove({_id: req.user._id})
-    .then(user => res.status(204).end())
+    .findByIdAndRemove(req.params.id)
+    .then(user => res.json({message: 'admin'}))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
   }
 });
@@ -210,14 +205,13 @@ router.delete('/:id', jwtAuth, (req, res) => {
 // a user to delete their own account
 router.delete('/', jwtAuth, (req, res) => {
   User
-  .findByIdAndRemove({_id: req.user._id})
-  .then(user => res.status(204).end())
+  .findByIdAndRemove(req.user._id)
+  .then(user => res.json({message: 'user'}))
   .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
 // an admn to update another users account info
 router.put('/:id', jwtAuth, jsonParser, (req, res) => {
-  console.log(req.params.id, req.params, req.body);
   if (!req.user.admin) {
     return res.send('you are not admin').status(401);
   }
@@ -236,7 +230,6 @@ router.put('/:id', jwtAuth, jsonParser, (req, res) => {
 
 // a user to update their own account info
 router.put('/', jwtAuth, jsonParser, (req, res) => {
-  console.log('req.body', req.body)
   const toUpdate = {};
   const updateableFields = ['email', 'firstName', 'lastName'];
   updateableFields.forEach(field => {

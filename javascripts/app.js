@@ -70,7 +70,7 @@ function watchLogIn() {
 			success: function(data) {
 				// set the token in local storage
 				localStorage.setItem("authToken", data.authToken);
-
+				localStorage.setItem("userId", data.userId)
 				// if admin redirect user to /admin
 
 				// if not admin redirect user to /timesheet
@@ -90,7 +90,6 @@ function watchLogOut() {
   //and load login page
   $('#log-out-button').on('click', event => {
 	event.preventDefault();
-	console.log('click log out button');
 	const authToken=localStorage.getItem("authToken"); 
 	$.ajax({
 		url: '/api/users/logout',
@@ -101,7 +100,9 @@ function watchLogOut() {
 		},
 		success: function() {
 			localStorage.removeItem("authToken");
-			localStorage.removeItem("userID");
+			localStorage.removeItem("userId");
+			localStorage.removeItem("adminId");
+			localStorage.removeItem("email");
 			window.location.replace('/login')
 		},
 		error: function() {

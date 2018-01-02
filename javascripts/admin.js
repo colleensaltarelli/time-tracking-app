@@ -1,4 +1,4 @@
-//Admin page render functionality
+//Admin functionality
 
 function renderAdmin(data) {
 	return `            <tr class="table-heading-row">
@@ -44,8 +44,7 @@ function watchAdmin() {
 function editUserAccount() {
 	$('#employee-table').on('click', '.admin-account-edit-button', event => {
 	event.preventDefault();
-	const userID= $(event.currentTarget).data('id');
-	console.log(userID);
+	const adminId= $(event.currentTarget).data('id');
     const authToken=localStorage.getItem("authToken");    
 		$.ajax({
 			method: "GET",
@@ -53,7 +52,7 @@ function editUserAccount() {
 			contentType: "application/json; charset=utf-8",
 			dataType : "json",
 			success: function(data) {
-				localStorage.setItem('userID', userID);	
+				localStorage.setItem('adminId', adminId);	
 				window.location.replace(`/app/account/`)
 			},
 			beforeSend: function(xhr) { 
@@ -67,9 +66,36 @@ function editUserAccount() {
 	});
 }
 
+function editTimesheet() {
+	$('#employee-table').on('click', '.admin-timesheet-edit-button', event => {
+	event.preventDefault();
+	const adminId= $(event.currentTarget).data('id');
+    const authToken=localStorage.getItem("authToken");    
+		$.ajax({
+			method: "GET",
+			url: `/api/users/is-admin`,
+			contentType: "application/json; charset=utf-8",
+			dataType : "json",
+			success: function(data) {
+				localStorage.setItem('adminId', adminId);	
+				window.location.replace(`/app/timesheet/`)
+			},
+			beforeSend: function(xhr) { 
+				xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);            
+			},
+			error: function(xhr, status, error) {
+				console.log('Something went wrong');
+				console.log(xhr, status, error);
+			}
+		});
+	});
+}
+
+
 function watchAdminSubmit() {
 	watchAdmin();
 	editUserAccount();
+	editTimesheet();
 }
 
 $(watchAdminSubmit);

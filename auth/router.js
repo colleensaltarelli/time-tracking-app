@@ -22,10 +22,8 @@ router.use(bodyParser.json());
 // The user provides a username and password to login
 
 router.post('/login', localAuth, (req, res) => {  
-  console.log('req.user', req.user)
   const authToken = createAuthToken(req.user.apiRepr());
-  res.json({authToken});
-  // res.redirect('/app/timesheet')
+  res.json({authToken, userId: req.user._id});
 });
 
 const jwtAuth = passport.authenticate('jwt', {session: false});

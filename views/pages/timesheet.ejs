@@ -10,7 +10,7 @@
         <% include ../partials/header-logout %>
     </header>
     <main class="timesheet-page">
-        <div class="timesheet-holder">
+        <div class="timesheet-holder hidden" id="clock-holder">
             <form name="clockInOut" id="clockInOut">
                 <h2>time clock</h2>
                 <div class="clock-buttons">
@@ -19,7 +19,7 @@
                 </div>
             </form>
         </div>
-        <div class="timesheet-holder">
+        <div class="timesheet-holder" id="timesheet-time-entries">
             <section>
                 <h2>time sheet</h2>
                 <table style="width:100%" id="timesheet-table">

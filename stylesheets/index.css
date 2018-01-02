@@ -133,6 +133,36 @@ footer {
     color: #FAF3EB;
  }
 
+ @media only screen and (min-width: 1px) and (max-width: 700px){
+    button {
+        min-width: 20px;
+    }
+    
+    button:hover {
+        min-width: 20px;
+    }
+    
+    .btn {
+        min-width: 20px;
+    }
+    
+    .btn:hover {
+        min-width: 20px;
+    }
+    
+    .btn-reverse {
+        min-width: 20px;
+    }
+    
+    .btn-reverse:hover {
+        min-width: 20px;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
 /* navigation */
 
 .logo-side {
@@ -360,7 +390,7 @@ footer {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 550px;
+    width: 850px;
     padding: 10px 30px 30px 30px;
     background-color: #FAF3EB;
     border: 4px solid #6F4F4F;
@@ -386,6 +416,7 @@ footer {
 
 .timesheet-page .timesheet-holder #timesheet-table td {
     text-align: center;
+    height: 25px;
 }
 
 .timesheet-page .timesheet-holder th {
@@ -394,7 +425,11 @@ footer {
 
 @media only screen and (min-width: 1px) and (max-width: 700px){
     .timesheet-page .timesheet-holder {
-        width: 400px;
+        width: 380px;
+    }
+    .timesheet-page .timesheet-holder #timesheet-table td {
+        text-align: center;
+        height: 50px;
     }
 }
 
@@ -410,6 +445,7 @@ body.admin {
 .admin h2 {
     text-align: center;
     margin-bottom: 30px;
+    color: #FAF3EB;
 }
 
 .admin #employee-table tr {
@@ -428,11 +464,19 @@ body.admin {
 .admin #employee-table th {
     height: 50px;
     font-size: 1.2rem;
+    color: #FAF3EB;
 }
 
 .admin #employee-table td {
     height: 70px;
     font-size: 1.1rem;
+    color: #FAF3EB;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 700px){
+    .admin .row {
+        padding: 0;
+    }
 }
 
 /* account page */

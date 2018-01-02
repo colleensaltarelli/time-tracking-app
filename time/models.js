@@ -16,7 +16,8 @@ const TimeSchema = mongoose.Schema({
     return {
       startTime: this.startTime || null,
       endTime: this.endTime || null,
-      userRef: this.userRef || ''
+      userRef: this.userRef || '',
+      _id: this._id || null
     };
   };
 

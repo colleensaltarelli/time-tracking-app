@@ -30,12 +30,56 @@ router.post('/clockout', jsonParser, (req, res) => {
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-// get a list of all time entries for the user
-router.get('/entries', jwtAuth, jsonParser, (req, res) => {
-    // console.log('req.user', req.user)
+router.get('/entries/:id', jwtAuth, jsonParser, (req, res) => {
+    if (!req.user.admin) {
+      return res.send('you are not admin').status(401);
+    }
+    else {
+    Time.find({userRef: req.params.id})
+      .then(entries => res.json(entries.map(entry => entry.apiRepr())))
+      .catch(err => res.status(500).json({message: 'Internal server error'}));
+    }
+  });
+  
+  router.get('/entries', jwtAuth, jsonParser, (req, res) => {
     Time.find({userRef: req.user._id})
     .then(entries => res.json(entries.map(entry => entry.apiRepr())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
+  });
+
+  router.get('/:id', jwtAuth, (req, res) => {
+    if (!req.user.admin) {
+      return res.send('you are not admin').status(401);
+    }
+    else {
+    Time.find(req.params._id)
+      .then(entries => res.json({message: 'admin'}))
+      .catch(err => res.status(500).json({message: 'Internal server error'}));
+    }
+  });
+  
+  router.get('/', jwtAuth, (req, res) => {
+    Time.find(req.user._id)
+    .then(entries => res.json({message: 'user'}))
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+  });
+
+  // admin to update another users timesheet
+router.put('/:id', jwtAuth, jsonParser, (req, res) => {
+  if (!req.user.admin) {
+    return res.send('you are not admin').status(401);
+  }
+  const toUpdate = {};
+  const updateableFields = ['startTime', 'endTime'];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      toUpdate[field] = req.body[field];
+    }
+  });
+  Time
+  .findByIdAndUpdate(req.params.id)
+  .then(time => res.json(time))
+  .catch(err => res.status(500).json({message: 'Something went wrong'}));
 });
 
 module.exports = {router};

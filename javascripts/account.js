@@ -22,10 +22,12 @@ function displayAccountInfo(data) {
 
 function getAccountInfo() {
 	const authToken=localStorage.getItem("authToken");  
-	const userID=localStorage.getItem("userId");   
+	const adminId=localStorage.getItem("adminId");   
+	const userId=localStorage.getItem("userId");   
+	const requestId=adminId ? adminId : userId;	
 	$.ajax({
 		method: "GET",
-		url: `/api/users/account/${userID}`,
+		url: `/api/users/account/${requestId}`,
 		contentType: "application/json; charset=utf-8",
 		dataType : "json",
 		beforeSend: function(xhr) { 
@@ -47,16 +49,16 @@ function updateAccountInfo() {
 		event.preventDefault();
 		console.log('click save button');
 		const authToken=localStorage.getItem("authToken"); 
-		const userID=localStorage.getItem("userID");   
+		const adminId=localStorage.getItem("adminId");   
 		const user={
 			firstName: $('#account-first-name').val(),
 			lastName: $('#account-last-name').val(),
 			email: $('#account-email').val()
 		}
-		console.log(user);
+		const requestId= adminId ? adminId : '';
 		$.ajax({
 			method: "PUT",
-			url: `/api/users/${userID}`,
+			url: `/api/users/${requestId}`,
 			contentType: "application/json; charset=utf-8",
 			dataType : "json",
 			data: JSON.stringify(user),
@@ -65,7 +67,6 @@ function updateAccountInfo() {
 			},
 			success: function(data) {
 				getAccountInfo(data);
-				console.log('data working', data);
 			},
 			error: function(xhr, status, error) {
 				console.log('Something went wrong');
@@ -75,23 +76,41 @@ function updateAccountInfo() {
 	});
 }
 
+function deleteUserCallback() {
+	localStorage.removeItem("authToken");
+	localStorage.removeItem("userId");
+	localStorage.removeItem("adminId");
+	localStorage.removeItem("email");
+	window.location.replace('/login')
+}
+
+function deleteAdminCallback () {
+	localStorage.removeItem("adminId");
+	window.location.replace('/app/admin')
+}
+
 function deleteAccount() {
 	$('#edit-user-form').on('click', '#delete-user-info-button', event => {
 		event.preventDefault();
 		console.log('click delete button');
+		const adminId=localStorage.getItem("adminId");   
 		const authToken=localStorage.getItem("authToken"); 
+		const requestId= adminId ? adminId : '';
 		$.ajax({
 			method: "DELETE",
-			url: `/api/users/`,
+			url: `/api/users/${requestId}`,
 			contentType: "application/json; charset=utf-8",
 			dataType : "json",
 			beforeSend: function(xhr) { 
 				xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);
 			},
-			success: function() {
-				console.log('user deleted');
-				window.location.replace('/login')
-
+			success: function(data) {
+				if (data.message === 'admin') {
+					deleteAdminCallback ();
+				}
+				else {
+					deleteUserCallback();
+				}
 			},
 			error: function(xhr, status, error) {
 				console.log('Something went wrong');
