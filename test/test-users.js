@@ -8,9 +8,6 @@
 
 // const expect = chai.expect;
 
-// // This let's us make HTTP requests
-// // in our tests.
-// // see: https://github.com/chaijs/chai-http
 // chai.use(chaiHttp);
 
 // describe('/api/user', function() {

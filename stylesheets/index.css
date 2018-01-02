@@ -424,9 +424,6 @@ footer {
 }
 
 @media only screen and (min-width: 1px) and (max-width: 700px){
-    .timesheet-page .timesheet-holder {
-        width: 380px;
-    }
     .timesheet-page .timesheet-holder #timesheet-table td {
         text-align: center;
         height: 50px;
