@@ -37,10 +37,11 @@ function renderTimeEntries(data) {
 	<th>clock in</th>
 	<th>clock out</th>
 	</tr>` + data.reduce((output, entry) => {
+		console.log('entry', entry)
 		return output + `
 			<tr class="timesheet-table-entry">
 				<td class="timesheet-time">${formatTime(entry.startTime)}</td> 
-				<td class="timesheet-time">${formatTime(entry.endTime)}</td>
+				<td class="timesheet-time">${entry.endTime ? formatTime(entry.endTime) : 'not clocked out'}</td>
 			</tr>
 		`;
 	}, '');
@@ -223,6 +224,7 @@ function updateTimeEntries() {
 			},
 			success: function() {
 				getAdminEntries();
+				toastr.info('Are you the 6 fingered man?');
 			},
 			error: function(xhr, status, error) {
 				console.log('Something went wrong');
