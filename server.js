@@ -113,7 +113,10 @@ function closeServer() {
         reject(err);
         return;
       }
-      resolve();
+      mongoose.disconnect(() => {
+        resolve();
+      });
+  
     });
   });
 }

@@ -59,10 +59,10 @@ function renderAdminTimeEntries(data) {
 	data.reduce((output, entry) => {
 		return output + `
 			<tr class="timesheet-table-entry">
-				<td class="timesheet-time"><input class="timesheet-time-field" id="start-time-entry" data-id:${entry._id} type="datetime-local" value="${formatAdminTime(entry.startTime)}"></td> 
-				<td class="timesheet-time"><input class="timesheet-time-field" id="end-time-entry" data-id:${entry._id} type="datetime-local" value="${formatAdminTime(entry.endTime)}"></td>
-				<td><button id="save-timesheet-button" type="submit" class="btn" data-id:${entry._id} value="Update">update</button></td>
-				<td><button id="delete-timesheet-button" type="submit" class="btn" data-id:${entry._id} value="Delete">delete</button></td>
+				<td class="timesheet-time"><input class="timesheet-time-field" id="start-time-entry" data-id="${entry._id}" type="datetime-local" value="${formatAdminTime(entry.startTime)}"></td> 
+				<td class="timesheet-time"><input class="timesheet-time-field" id="end-time-entry" data-id="${entry._id}" type="datetime-local" value="${formatAdminTime(entry.endTime)}"></td>
+				<td><button id="save-timesheet-button" type="submit" class="btn small" data-id="${entry._id}" value="Update">save</button></td>
+				<td><button id="delete-timesheet-button" type="submit" class="btn small" data-id="${entry._id}" value="Delete">delete</button></td>
 			</tr>
 		`;
 	}, 
@@ -206,26 +206,53 @@ function updateTimeEntries() {
 		console.log('click save button');
 		const authToken=localStorage.getItem("authToken"); 
 		const adminId=localStorage.getItem("adminId");   
+		const timeId=$(event.currentTarget).data('id');
 		const timeEntries={
-			startTime: $('#start-time-entry').val(),
-			endTime: $('#end-time-entry').val(),
+			startTime: $(event.currentTarget).closest('.timesheet-table-entry').find('#start-time-entry').val(),
+			endTime: $(event.currentTarget).closest('.timesheet-table-entry').find('#end-time-entry').val(),
 		}
-		const requestId= adminId ? adminId : '';
+		console.log('timeEntries', timeEntries)
 		$.ajax({
 			method: "PUT",
-			url: `/api/time/${requestId}`,
+			url: `/api/time/${timeId}`,
 			contentType: "application/json; charset=utf-8",
 			dataType : "json",
 			data: JSON.stringify(timeEntries),
 			beforeSend: function(xhr) { 
 				xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);
 			},
-			success: function(data) {
-				displayAdminTimeEntries(data);
+			success: function() {
+				getAdminEntries();
 			},
 			error: function(xhr, status, error) {
 				console.log('Something went wrong');
 				console.log(xhr, status, error);
+			}
+		});
+	});
+}
+
+function deleteTimeEntries() {
+	$('#timesheet-time-entries').on('click', '#delete-timesheet-button', event => {
+		event.preventDefault();
+		console.log('click delete button');
+		const authToken=localStorage.getItem("authToken"); 
+		const adminId=localStorage.getItem("adminId"); 
+		const timeId=$(event.currentTarget).data('id');
+		$.ajax({
+			method: "DELETE",
+			url: `/api/time/${timeId}`,
+			contentType: "application/json; charset=utf-8",
+			dataType : "json",
+			beforeSend: function(xhr) { 
+				xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);
+			},
+			success: function(data) {
+				getAdminEntries();
+			},
+			error: function(xhr, status, error) {
+				console.log('Something went wrong');
+				console.log(error);
 			}
 		});
 	});
@@ -236,6 +263,7 @@ function watchTimeSubmit() {
 	watchNewClockOut();
 	watchTimesheet();
 	updateTimeEntries();
+	deleteTimeEntries();
 }
 
 $(watchTimeSubmit);

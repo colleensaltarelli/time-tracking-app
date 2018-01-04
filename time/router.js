@@ -69,17 +69,21 @@ router.put('/:id', jwtAuth, jsonParser, (req, res) => {
   if (!req.user.admin) {
     return res.send('you are not admin').status(401);
   }
-  const toUpdate = {};
-  const updateableFields = ['startTime', 'endTime'];
-  updateableFields.forEach(field => {
-    if (field in req.body) {
-      toUpdate[field] = req.body[field];
-    }
-  });
   Time
-  .findByIdAndUpdate(req.params.id)
+  .findByIdAndUpdate(req.params.id, req.body)
   .then(time => res.json(time))
   .catch(err => res.status(500).json({message: 'Something went wrong'}));
 });
+
+  // admin to delete another users timesheet
+  router.delete('/:id', jwtAuth, (req, res) => {
+    if (!req.user.admin) {
+      return res.send('you are not admin').status(401);
+    }
+    Time
+    .findByIdAndRemove(req.params.id)
+    .then(time => res.json(time))
+    .catch(err => res.status(500).json({message: 'Something went wrong'}));
+  });
 
 module.exports = {router};

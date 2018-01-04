@@ -68,13 +68,18 @@ function watchLogIn() {
 			contentType: "application/json; charset=utf-8",
 			dataType : "json",
 			success: function(data) {
-				// set the token in local storage
+				
+				console.log('log in data', data);
 				localStorage.setItem("authToken", data.authToken);
 				localStorage.setItem("userId", data.userId)
 				// if admin redirect user to /admin
-
+				if (data.flag) {
+					window.location.replace('/app/admin')
+				}
+				else {
 				// if not admin redirect user to /timesheet
 				window.location.replace('/app/timesheet')
+				}
 			},
 			error: function() {
 				  //alert(err.Message);
