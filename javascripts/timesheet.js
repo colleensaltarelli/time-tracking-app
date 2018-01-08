@@ -212,6 +212,11 @@ function updateTimeEntries() {
 			startTime: $(event.currentTarget).closest('.timesheet-table-entry').find('#start-time-entry').val(),
 			endTime: $(event.currentTarget).closest('.timesheet-table-entry').find('#end-time-entry').val(),
 		}
+
+
+		console.log('Date.now()', Date.now())
+		console.log('timeEntries.endTime', timeEntries.endTime)
+
 		$.ajax({
 			method: "PUT",
 			url: `/api/time/${timeId}`,

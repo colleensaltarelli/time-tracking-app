@@ -4,6 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const moment = require('moment');
+moment().format();
 
 mongoose.Promise = global.Promise;
 
@@ -16,7 +18,7 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 //add a new clock-in entry
 router.post('/clockin', jsonParser, jwtAuth, (req, res) => {
     Time
-    .create({userRef: req.user._id})
+    .create({userRef: req.user._id, startTime: Date.now().getTime()})
     .then(time => res.status(201).json(time))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
@@ -24,7 +26,7 @@ router.post('/clockin', jsonParser, jwtAuth, (req, res) => {
 //add a new clock-out entry
 router.post('/clockout', jsonParser, (req, res) => {
     Time.findById(req.body.id)
-    .update({endTime: Date.now()})
+    .update({endTime: Date.now().getTime()})
     .then(time => res.status(201).json(time))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
