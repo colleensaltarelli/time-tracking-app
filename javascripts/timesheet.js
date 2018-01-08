@@ -192,7 +192,7 @@ function getAdminEntries() {
             xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);            
 		},
 		success: function(data) {
-			// console.log('admin data', data)
+			console.log('admin data', data);
 			displayAdminTimeEntries(data);
 			addClassToHolder();
 		},
