@@ -1,0 +1,65 @@
+/* signup */
+
+.signup-page #signup-form-holder {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    padding: 10px 30px;
+    background-color: #FAF3EB;
+    border: 4px solid #6F4F4F;
+    border-radius: 20px;
+    margin-top: 60px;
+}
+
+.signup-page #signup-form-holder h2 {
+    text-align: center;
+    color: #6F4F4F;
+}
+
+.signup-page #signup-form-holder input[type="text"] {
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 20px;
+}
+.signup-page #signup-form-holder input[type="password"] {
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 20px;
+}
+
+.signup-page #signup-form-holder input[type="text"]:focus {
+    outline: none;
+}
+
+.signup-page #signup-form-holder input[type="password"]:focus {
+    outline: none;
+}
+
+.signup-page #signup-form-holder p {
+    text-align: center;
+    color: #6F4F4F;
+    margin-top: 30px;
+}
+
+.signup-page #signup-form-holder p a {
+    color: #1897A2;
+}
+
+.signup-page #signup-form-holder p a:hover {
+    color: #6F4F4F;
+}
+
+@media only screen and (min-width: 1px) and (max-width: 700px){
+    .signup-page #signup-form-holder {
+        width: auto;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+}
