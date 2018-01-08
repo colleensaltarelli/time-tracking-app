@@ -32,6 +32,7 @@ button {
     text-transform: lowercase;
     padding: 10px 20px;
     min-width: 120px;
+    outline: none;
 }
 
 button:hover {
@@ -43,6 +44,7 @@ button:hover {
     text-transform: lowercase;
     padding: 10px 20px;
     min-width: 120px;
+    outline: none;
 }
 
 .btn {
@@ -54,6 +56,7 @@ button:hover {
     text-transform: lowercase;
     padding: 10px 20px;
     min-width: 120px;
+    outline: none;
 }
 
 .btn:hover {
@@ -65,6 +68,7 @@ button:hover {
     text-transform: lowercase;
     padding: 10px 20px;
     min-width: 120px;
+    outline: none;
 }
 
 button:disabled {
@@ -76,6 +80,7 @@ button:disabled {
     text-transform: lowercase;
     padding: 10px 20px;
     min-width: 120px; 
+    outline: none;
 }
 
 .btn-reverse {
@@ -112,6 +117,23 @@ button:disabled {
     text-align: right;
     margin-top: 60px;
     margin-bottom: 60px;
+}
+
+.toast {
+    background-color: #6F4F4F;
+    border: 4px solid #FAF3EB;
+}
+
+#toast-container > div {
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+}
+
+#toast-container > div:hover {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 footer {
@@ -393,7 +415,7 @@ footer {
 
 .timesheet-page .timesheet-holder {
     display: block;
-    margin-left: 10%;
+    margin-left: 12%;
     padding: 10px 30px 30px 30px;
     background-color: #FAF3EB;
     border: 4px solid #6F4F4F;
@@ -426,11 +448,18 @@ footer {
     padding-bottom: 15px;
 }
 
+
 @media only screen and (min-width: 1px) and (max-width: 700px){
-    .timesheet-page .timesheet-holder {
+    .timesheet-page .timesheet-holder.edit-holder {
         margin-left: 0;
         width: 740px;
     }
+
+    .timesheet-page .timesheet-holder {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
     .timesheet-page .timesheet-holder #timesheet-table td {
         text-align: center;
         height: 50px;

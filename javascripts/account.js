@@ -47,7 +47,6 @@ function getAccountInfo() {
 function updateAccountInfo() {
 	$('#edit-user-form').on('click', '#save-user-info-button', event => {
 		event.preventDefault();
-		console.log('click save button');
 		const authToken=localStorage.getItem("authToken"); 
 		const adminId=localStorage.getItem("adminId");   
 		const user={
@@ -67,6 +66,7 @@ function updateAccountInfo() {
 			},
 			success: function(data) {
 				getAccountInfo(data);
+				toastr.success('Account Updated');
 			},
 			error: function(xhr, status, error) {
 				console.log('Something went wrong');
@@ -92,7 +92,6 @@ function deleteAdminCallback () {
 function deleteAccount() {
 	$('#edit-user-form').on('click', '#delete-user-info-button', event => {
 		event.preventDefault();
-		console.log('click delete button');
 		const adminId=localStorage.getItem("adminId");   
 		const authToken=localStorage.getItem("authToken"); 
 		const requestId= adminId ? adminId : '';
@@ -107,9 +106,11 @@ function deleteAccount() {
 			success: function(data) {
 				if (data.message === 'admin') {
 					deleteAdminCallback ();
+					toastr.success('User Account Deleted');
 				}
 				else {
 					deleteUserCallback();
+					toastr.success('Account Deleted');
 				}
 			},
 			error: function(xhr, status, error) {

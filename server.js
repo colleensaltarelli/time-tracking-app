@@ -13,6 +13,7 @@ mongoose.Promise = global.Promise;
 
 const { router: usersRouter } = require('./users');
 const { router: displayRouter } = require('./display/router');
+const { router: publicRouter } = require('./public/router');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 const {router: timeRouter} = require('./time');
 const { DATABASE_URL } = require('./config');
@@ -61,23 +62,9 @@ app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
 app.use('/api/time/', timeRouter);
 app.use('/app/', displayRouter);
+app.use('/', publicRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
-
-// index page 
-app.get('/', (req, res) => {
-  res.render('pages/index');
-});
-
-// signup page 
-app.get('/signup/', (req, res) => {
-  res.render('pages/signup');
-});
-
-// login page 
-app.get('/login/', (req, res) => {
-  res.render('pages/login');
-});
 
 app.use('*', (req, res) => {
   return res.status(404).json({ message: 'Not Found' });

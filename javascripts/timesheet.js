@@ -37,7 +37,6 @@ function renderTimeEntries(data) {
 	<th>clock in</th>
 	<th>clock out</th>
 	</tr>` + data.reduce((output, entry) => {
-		console.log('entry', entry)
 		return output + `
 			<tr class="timesheet-table-entry">
 				<td class="timesheet-time">${formatTime(entry.startTime)}</td> 
@@ -72,6 +71,10 @@ function renderAdminTimeEntries(data) {
 
 function displayAdminTimeEntries(data) {
     $('#timesheet-table').html(renderAdminTimeEntries(data.reverse()));	
+}
+
+function addClassToHolder() {
+	$('.timesheet-holder').addClass('edit-holder');
 }
 
 function formatTime(time) {
@@ -140,13 +143,10 @@ function watchTimesheet() {
             xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);            
 		},
 		success: function(data) {
-			console.log(data);
 			if (data.message === 'admin') {
-				console.log('admin');
 				getAdminEntries();
 			}
 			else {
-				console.log('user');
 				getEntries();
 				showClockHolder();				
 			}
@@ -193,6 +193,7 @@ function getAdminEntries() {
 		},
 		success: function(data) {
 			displayAdminTimeEntries(data);
+			addClassToHolder();
 		},
 		error: function(xhr, status, error) {
 			console.log('Something went wrong');
@@ -204,7 +205,6 @@ function getAdminEntries() {
 function updateTimeEntries() {
 	$('#timesheet-time-entries').on('click', '#save-timesheet-button', event => {
 		event.preventDefault();
-		console.log('click save button');
 		const authToken=localStorage.getItem("authToken"); 
 		const adminId=localStorage.getItem("adminId");   
 		const timeId=$(event.currentTarget).data('id');
@@ -212,7 +212,6 @@ function updateTimeEntries() {
 			startTime: $(event.currentTarget).closest('.timesheet-table-entry').find('#start-time-entry').val(),
 			endTime: $(event.currentTarget).closest('.timesheet-table-entry').find('#end-time-entry').val(),
 		}
-		console.log('timeEntries', timeEntries)
 		$.ajax({
 			method: "PUT",
 			url: `/api/time/${timeId}`,
@@ -224,7 +223,7 @@ function updateTimeEntries() {
 			},
 			success: function() {
 				getAdminEntries();
-				toastr.info('Are you the 6 fingered man?');
+				toastr.success('Time Entry Updated');
 			},
 			error: function(xhr, status, error) {
 				console.log('Something went wrong');
@@ -237,7 +236,6 @@ function updateTimeEntries() {
 function deleteTimeEntries() {
 	$('#timesheet-time-entries').on('click', '#delete-timesheet-button', event => {
 		event.preventDefault();
-		console.log('click delete button');
 		const authToken=localStorage.getItem("authToken"); 
 		const adminId=localStorage.getItem("adminId"); 
 		const timeId=$(event.currentTarget).data('id');
@@ -251,6 +249,8 @@ function deleteTimeEntries() {
 			},
 			success: function(data) {
 				getAdminEntries();
+				toastr.success('Time Entry Deleted');
+				
 			},
 			error: function(xhr, status, error) {
 				console.log('Something went wrong');

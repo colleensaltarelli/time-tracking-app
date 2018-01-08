@@ -15,7 +15,6 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 
 //add a new clock-in entry
 router.post('/clockin', jsonParser, jwtAuth, (req, res) => {
-    console.log('req.user', req.user)
     Time
     .create({userRef: req.user._id})
     .then(time => res.status(201).json(time))

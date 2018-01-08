@@ -68,8 +68,6 @@ function watchLogIn() {
 			contentType: "application/json; charset=utf-8",
 			dataType : "json",
 			success: function(data) {
-				
-				console.log('log in data', data);
 				localStorage.setItem("authToken", data.authToken);
 				localStorage.setItem("userId", data.userId)
 				// if admin redirect user to /admin
@@ -91,8 +89,6 @@ function watchLogIn() {
 }
 
 function watchLogOut() {
-  //clicking log out icon will remove user authentication token
-  //and load login page
   $('#log-out-button').on('click', event => {
 	event.preventDefault();
 	const authToken=localStorage.getItem("authToken"); 
