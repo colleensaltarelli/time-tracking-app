@@ -8,6 +8,10 @@
 </footer>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="/javascripts/moment.js"></script>
+<script src="/javascripts/moment-timezone.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script>moment().format();</script>
+<script>
+const timezone= Intl.DateTimeFormat().resolvedOptions().timeZone;    
+moment().tz(timezone).format();
+</script>
 <script src="/javascripts/app.js"></script>

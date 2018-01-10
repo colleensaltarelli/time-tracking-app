@@ -78,11 +78,15 @@ function addClassToHolder() {
 }
 
 function formatTime(time) {
-	return moment(time).format("M/D/YYYY hh:mm a");
+	const formatted = moment.utc(time).local().format("YYYY-MM-DD HH:mm a");
+	console.log(formatted, 'formatted');
+	return formatted;
 }
 
 function formatAdminTime(time) {
-	return moment(time).format("YYYY-MM-DDThh:mm");
+	const formatted = moment.utc(time).local().format("YYYY-MM-DDTHH:mm");
+	console.log(formatted, 'formatted');
+	return formatted;
 }
 
 function newClockIn() {
