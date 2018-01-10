@@ -78,13 +78,13 @@ function addClassToHolder() {
 }
 
 function formatTime(time) {
-	const formatted = moment.utc(time).local().format("YYYY-MM-DD HH:mm a");
+	const formatted = moment(time).local().format("YYYY-MM-DD HH:mm a");
 	console.log(formatted, 'formatted');
 	return formatted;
 }
 
 function formatAdminTime(time) {
-	const formatted = moment.utc(time).local().format("YYYY-MM-DDTHH:mm");
+	const formatted = moment(time).local().format("YYYY-MM-DDTHH:mm");
 	console.log(formatted, 'formatted');
 	return formatted;
 }
