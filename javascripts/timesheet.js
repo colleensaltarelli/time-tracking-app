@@ -213,9 +213,11 @@ function updateTimeEntries() {
 		const authToken=localStorage.getItem("authToken"); 
 		const adminId=localStorage.getItem("adminId");   
 		const timeId=$(event.currentTarget).data('id');
+		const startTime = $(event.currentTarget).closest('.timesheet-table-entry').find('#start-time-entry').val()
+		const endTime = $(event.currentTarget).closest('.timesheet-table-entry').find('#end-time-entry').val()
 		const timeEntries={
-			startTime: $(event.currentTarget).closest('.timesheet-table-entry').find('#start-time-entry').val(),
-			endTime: $(event.currentTarget).closest('.timesheet-table-entry').find('#end-time-entry').val(),
+			startTime: moment(startTime),
+			endTime: moment(endTime)
 		}
 		$.ajax({
 			method: "PUT",
