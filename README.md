@@ -12,9 +12,9 @@ Signup
 
 ![homepage](https://raw.githubusercontent.com/colleensaltarelli/time-tracking-app/master/images/signup.png "Signup")
 
-Signup
+Login
 
-![homepage](https://raw.githubusercontent.com/colleensaltarelli/time-tracking-app/master/images/login.png "Signup")
+![homepage](https://raw.githubusercontent.com/colleensaltarelli/time-tracking-app/master/images/login.png "login")
 
 Timesheet
 
