@@ -1,6 +1,6 @@
 # clock:in
 
-A time tracking solution, whether it’s from your desktop, smartphone or tablet, it’s never been so easy to track your employees time.
+A time tracking solution, whether it’s from your desktop, smartphone or tablet, it’s never been so easy to track your employees time. View the app here: https://desolate-lake-73130.herokuapp.com/
 
 ## Screenshots:
 
