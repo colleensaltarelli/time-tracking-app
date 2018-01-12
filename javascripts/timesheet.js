@@ -94,7 +94,7 @@ function newClockIn() {
 	$.ajax({
 		method: "POST",
 		url: '/api/time/clockin',
-		contentType: "application/json; charset=utf-8",
+		contentType: "application/json",
 		dataType : "json",
 		success: function(data) {
 			setDataId(data);
@@ -117,7 +117,7 @@ function newClockOut() {
 		method: "POST",
 		url: `/api/time/clockout`,
 		data: JSON.stringify({ id: $('#clock-out-time').attr('data-id') }),
-		contentType: "application/json; charset=utf-8",
+		contentType: "application/json",
 		dataType : "json",
 		success: function(data) { 
 			getEntries(data);
@@ -141,7 +141,7 @@ function watchTimesheet() {
 	$.ajax({
 		method: "GET",
 		url: `/api/time/${requestId}`,
-		contentType: "application/json; charset=utf-8",
+		contentType: "application/json",
 		dataType : "json",
 		beforeSend: function(xhr) { 
             xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);            
@@ -167,7 +167,7 @@ function getEntries() {
 	$.ajax({
 		method: "GET",
 		url: `/api/time/entries`,
-		contentType: "application/json; charset=utf-8",
+		contentType: "application/json",
 		dataType : "json",
 		beforeSend: function(xhr) { 
             xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);            
@@ -190,7 +190,7 @@ function getAdminEntries() {
 	$.ajax({
 		method: "GET",
 		url: `/api/time/entries/${requestId}`,
-		contentType: "application/json; charset=utf-8",
+		contentType: "application/json",
 		dataType : "json",
 		beforeSend: function(xhr) { 
             xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);            
@@ -222,7 +222,7 @@ function updateTimeEntries() {
 		$.ajax({
 			method: "PUT",
 			url: `/api/time/${timeId}`,
-			contentType: "application/json; charset=utf-8",
+			contentType: "application/json",
 			dataType : "json",
 			data: JSON.stringify(timeEntries),
 			beforeSend: function(xhr) { 
@@ -249,7 +249,7 @@ function deleteTimeEntries() {
 		$.ajax({
 			method: "DELETE",
 			url: `/api/time/${timeId}`,
-			contentType: "application/json; charset=utf-8",
+			contentType: "application/json",
 			dataType : "json",
 			beforeSend: function(xhr) { 
 				xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);

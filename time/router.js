@@ -17,7 +17,7 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 
 //add a new clock-in entry
 router.post('/clockin', jsonParser, jwtAuth, (req, res) => {
-    console.log(moment())
+  console.log('hitting the clock in route');
     Time
     .create({userRef: req.user._id, startTime: moment()})
     .then(time => res.status(201).json(time))
@@ -25,7 +25,7 @@ router.post('/clockin', jsonParser, jwtAuth, (req, res) => {
 });
 
 //add a new clock-out entry
-router.post('/clockout', jsonParser, (req, res) => {
+router.post('/clockout', jsonParser, jwtAuth, (req, res) => {
     Time.findById(req.body.id)
     .update({endTime: moment()})
     .then(time => res.status(201).json(time))
