@@ -4,17 +4,17 @@ A time tracking solution, whether it’s from your desktop, smartphone or tablet
 
 ## Screenshots:
 
-Home/Search Panel
+Homepage
 
-![alt text](https://raw.githubusercontent.com/colleensaltarelli/mixology.io/master/images/home-search-panel.png "home search panel")
+![alt text](https://raw.githubusercontent.com/colleensaltarellitime-tracking-app/blob/master/images/homepage.png "homepage")
 
-Results Panel
+<!-- Results Panel
 
 ![alt text](https://raw.githubusercontent.com/colleensaltarelli/mixology.io/master/images/results-panel.png "results panel")
 
 No Results Panel
 
-![alt text](https://raw.githubusercontent.com/colleensaltarelli/mixology.io/master/images/no-results-panel.png "no results panel")
+![alt text](https://raw.githubusercontent.com/colleensaltarelli/mixology.io/master/images/no-results-panel.png "no results panel") -->
 
 
 ## Introduction:
