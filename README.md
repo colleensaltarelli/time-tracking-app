@@ -6,17 +6,32 @@ A time tracking solution, whether it’s from your desktop, smartphone or tablet
 
 Homepage
 
-![alt text](https://raw.githubusercontent.com/colleensaltarelli/time-tracking-app/master/images/homepage.png "homepage")
+![homepage](https://raw.githubusercontent.com/colleensaltarelli/time-tracking-app/master/images/homepage.png "homepage")
 
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+Signup
 
-<!-- Results Panel
+![homepage](https://raw.githubusercontent.com/colleensaltarelli/time-tracking-app/master/images/signup.png "Signup")
 
-![alt text](https://raw.githubusercontent.com/colleensaltarelli/mixology.io/master/images/results-panel.png "results panel")
+Signup
 
-No Results Panel
+![homepage](https://raw.githubusercontent.com/colleensaltarelli/time-tracking-app/master/images/login.png "Signup")
 
-![alt text](https://raw.githubusercontent.com/colleensaltarelli/mixology.io/master/images/no-results-panel.png "no results panel") -->
+Timesheet
+
+![homepage](https://raw.githubusercontent.com/colleensaltarelli/time-tracking-app/master/images/timeclock.png "timesheet")
+
+Account Info
+
+![account](https://raw.githubusercontent.com/colleensaltarelli/time-tracking-app/master/images/accountinfo.png "account")
+
+Admin Dashboard
+
+![Admin](https://raw.githubusercontent.com/colleensaltarelli/time-tracking-app/master/images/admin.png "Admin")
+
+Admin Timesheet
+
+![admin timesheet](https://raw.githubusercontent.com/colleensaltarelli/time-tracking-app/master/images/admintimesheet.png "admin timesheet")
+
 
 
 ## Introduction:
