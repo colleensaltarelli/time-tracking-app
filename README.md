@@ -6,7 +6,9 @@ A time tracking solution, whether it’s from your desktop, smartphone or tablet
 
 Homepage
 
-![alt text](https://raw.githubusercontent.com/colleensaltarellitime-tracking-app/blob/master/images/homepage.png "homepage")
+![alt text](https://raw.githubusercontent.com/colleensaltarelli/time-tracking-app/blob/master/images/homepage.png "homepage")
+
+![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
 
 <!-- Results Panel
 
