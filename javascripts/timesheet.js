@@ -78,7 +78,7 @@ function addClassToHolder() {
 }
 
 function formatTime(time) {
-	const formatted = moment(time).local().format("YYYY-MM-DD HH:mm a");
+	const formatted = moment(time).local().format("MM/DD/YYYY HH:mm a");
 	console.log(formatted, 'formatted');
 	return formatted;
 }

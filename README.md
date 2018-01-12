@@ -2,6 +2,11 @@
 
 A time tracking solution, whether it’s from your desktop, smartphone or tablet, it’s never been so easy to track your employees time. View the app here: https://desolate-lake-73130.herokuapp.com/
 
+
+## Introduction:
+
+clock:in allows employers to manage their employees clock in and clock out times in one place, on any type of device. Employees each have their own account for which they can log in, edit their account and do the basic functionality of clocking in at the beginning of their shift and clocking out at the end.  Employers can then log into the admin account and either edit an employees account or timesheet.  Timesheets can be edited if an employee forgets to clock out or a time change needs to be made.
+
 ## Screenshots:
 
 Homepage
@@ -32,11 +37,6 @@ Admin Timesheet
 
 ![admin timesheet](https://raw.githubusercontent.com/colleensaltarelli/time-tracking-app/master/images/admintimesheet.png "admin timesheet")
 
-
-
-## Introduction:
-
-clock:in allows employers to manage their employees clock in and clock out times in one place, on any type of device. Employees each have their own account for which they can log in, edit their account and do the basic functionality of clocking in at the beginning of their shift and clocking out at the end.  Employers can then log into the admin account and either edit an employees account or timesheet.  Timesheets can be edited if an employee forgets to clock out or a time change needs to be made.
 
 ## Technical: 
 

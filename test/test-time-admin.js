@@ -75,6 +75,7 @@ describe('Time Router for admin', () => {
         .set('Authorization', `Bearer ${admin.token}`)
         .then((res) => {
           expect(res).to.be.json;
+          expect(res.body).to.be.a('array');
         });
     });
 
@@ -88,25 +89,25 @@ describe('Time Router for admin', () => {
         });
     });
 
-    // it('admin to update another users timesheet on PUT', () => {
-    //   const newClockIn = {startTime: "2019-01-10T13:56:00.000Z"};
-    //   return chai.request(app)
-    //     .put('/api/time/:id')
-    //     .send(newClockIn)
-    //     .set('Authorization', `Bearer ${token}`)
-    //     .then((res) => {
-    //       expect(res).to.be.json;
-    //     });
-    // });
+    it('admin to update another users timesheet on PUT', () => {
+      const newClockIn = {startTime: "2019-01-10T13:56:00.000Z"};
+      return chai.request(app)
+      .put(`/api/time/${user._id}`)
+        .send(newClockIn)
+        .set('Authorization', `Bearer ${admin.token}`)
+        .then((res) => {
+          expect(res).to.be.json;
+        });
+    });
 
-    // it('admin to delete another users timesheet on PUT', () => {
-    //   return chai.request(app)
-    //     .delete(`/api/time/${1}`)
-    //     .set('Authorization', `Bearer ${token}`)
-    //     .then((res) => {
-    //       expect(res).to.be.json;
-    //     });
-    // });
+    it('admin to delete another users timesheet on PUT', () => {
+      return chai.request(app)
+      .delete(`/api/time/${user._id}`)
+        .set('Authorization', `Bearer ${admin.token}`)
+        .then((res) => {
+          expect(res).to.be.json;
+        });
+    });
 
     afterEach( () => {
       admin.password = null;
