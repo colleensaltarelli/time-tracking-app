@@ -4,7 +4,7 @@ A time tracking solution, whether it’s from your desktop, smartphone or tablet
 
 ## Screenshots:
 
-Home/Search Panel
+<!-- Home/Search Panel
 
 ![alt text](https://raw.githubusercontent.com/colleensaltarelli/mixology.io/master/images/home-search-panel.png "home search panel")
 
@@ -14,7 +14,7 @@ Results Panel
 
 No Results Panel
 
-![alt text](https://raw.githubusercontent.com/colleensaltarelli/mixology.io/master/images/no-results-panel.png "no results panel")
+![alt text](https://raw.githubusercontent.com/colleensaltarelli/mixology.io/master/images/no-results-panel.png "no results panel") -->
 
 
 ## Introduction:
