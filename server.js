@@ -15,12 +15,12 @@ const { router: usersRouter } = require('./users');
 const { router: displayRouter } = require('./display/router');
 const { router: publicRouter } = require('./public/router');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
-const {router: timeRouter} = require('./time');
+const { router: timeRouter } = require('./time');
 const { DATABASE_URL } = require('./config');
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Logging
 app.use(morgan('common'));
@@ -55,8 +55,8 @@ app.use(passport.session());
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-passport.serializeUser(function(user, done) { done(null, user);});
-passport.deserializeUser(function(user, done) { done(null, user);});
+passport.serializeUser(function (user, done) { done(null, user); });
+passport.deserializeUser(function (user, done) { done(null, user); });
 
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
@@ -73,21 +73,21 @@ app.use('*', (req, res) => {
 let server;
 const PORT = process.env.PORT || 8080;
 
-function runServer(databaseUrl=DATABASE_URL, port=PORT) {
+function runServer(databaseUrl = DATABASE_URL, port = PORT) {
   return new Promise((resolve, reject) => {
     mongoose.connect(databaseUrl, err => {
       if (err) {
-          return reject(err);
+        return reject(err);
       }
       console.log(`You are now connected to your database at: ${databaseUrl}`);
       server = app.listen(port, () => {
-          console.log(`Your app (node server) is listening on port ${port}`);
-          resolve();
+        console.log(`Your app (node server) is listening on port ${port}`);
+        resolve();
       })
-      .on('error', err => {
+        .on('error', err => {
           mongoose.disconnect();
           reject(err);
-      });
+        });
     });
   });
 }
@@ -103,7 +103,7 @@ function closeServer() {
       mongoose.disconnect(() => {
         resolve();
       });
-  
+
     });
   });
 }
@@ -112,4 +112,4 @@ if (require.main === module) {
   runServer().catch(err => console.error(err));
 };
 
-module.exports = {app, runServer, closeServer};
+module.exports = { app, runServer, closeServer };
