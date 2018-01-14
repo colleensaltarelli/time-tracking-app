@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <% include ../partials/head %>
-    <link href="/stylesheets/signup.css" rel="stylesheet" type="text/css" />
-    <title>clock:in</title>
+        <link href="/stylesheets/signup.css" rel="stylesheet" type="text/css" />
+        <title>clock:in</title>
 </head>
+
 <body class="container">
 
-<header>
-    <% include ../partials/header %>
-</header>
+    <header>
+        <% include ../partials/header %>
+    </header>
 
-<main class="signup-page">
-<div id="signup-form-holder">
-<h2>sign up</h2>
-<form name="signUp" id="signup-form" >
-    <label for="firstName"></label>
-    <input type="text" name="firstName" placeholder="first name" id="signup-firstname" >
+    <main class="signup-page">
+        <div id="signup-form-holder">
+            <h2>sign up</h2>
+            <form name="signUp" id="signup-form">
+                <label for="firstName"></label>
+                <input type="text" name="firstName" placeholder="first name" id="signup-firstname">
 
-    <label for="lastName"></label>
-    <input type="text" name="lastName" placeholder="last name" id="signup-lastname">
+                <label for="lastName"></label>
+                <input type="text" name="lastName" placeholder="last name" id="signup-lastname">
 
-    <label for="email"></label>
-    <input type="text" name="email" placeholder="email" id="signup-email">
+                <label for="email"></label>
+                <input type="text" name="email" placeholder="email" id="signup-email">
 
-    <label for="password"></label>
-    <input type="password" name="password" placeholder="password" id="signup-password">
+                <label for="password"></label>
+                <input type="password" name="password" placeholder="password" id="signup-password">
 
-    <input id="signup-button" type="submit" class="btn-reverse" value="Submit">
-    <p class="login-message">Already have an account? <a href="/login" id="logInLink">Login</a></p>
-  </form> 
-</div>
-</main>
+                <input id="signup-button" type="submit" class="btn-reverse" value="Submit">
+                <p class="login-message">Already have an account?
+                    <a href="/login" id="logInLink">Login</a>
+                </p>
+            </form>
+        </div>
+    </main>
 
-<% include ../partials/footer %>
+    <% include ../partials/footer %>
 </body>
+
 </html>
