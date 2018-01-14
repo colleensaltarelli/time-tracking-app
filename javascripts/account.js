@@ -1,4 +1,4 @@
-//User account page render edit and delete functionality
+//Account page functionality
 
 function renderAccountInfo(data) {
 	return `
@@ -17,27 +17,27 @@ function renderAccountInfo(data) {
 }
 
 function displayAccountInfo(data) {
-    $('#edit-user-form').html(renderAccountInfo(data));	
+	$('#edit-user-form').html(renderAccountInfo(data));
 }
 
 function getAccountInfo() {
-	const authToken=localStorage.getItem("authToken");  
-	const adminId=localStorage.getItem("adminId");   
-	const userId=localStorage.getItem("userId");   
-	const requestId=adminId ? adminId : userId;	
+	const authToken = localStorage.getItem("authToken");
+	const adminId = localStorage.getItem("adminId");
+	const userId = localStorage.getItem("userId");
+	const requestId = adminId ? adminId : userId;
 	$.ajax({
 		method: "GET",
 		url: `/api/users/account/${requestId}`,
 		contentType: "application/json; charset=utf-8",
-		dataType : "json",
-		beforeSend: function(xhr) { 
+		dataType: "json",
+		beforeSend: function (xhr) {
 			xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);
 		},
-		success: function(data) {
+		success: function (data) {
 			displayAccountInfo(data);
 
 		},
-		error: function(xhr, status, error) {
+		error: function (xhr, status, error) {
 			console.log('Something went wrong');
 			console.log(error);
 		}
@@ -47,28 +47,28 @@ function getAccountInfo() {
 function updateAccountInfo() {
 	$('#edit-user-form').on('click', '#save-user-info-button', event => {
 		event.preventDefault();
-		const authToken=localStorage.getItem("authToken"); 
-		const adminId=localStorage.getItem("adminId");   
-		const user={
+		const authToken = localStorage.getItem("authToken");
+		const adminId = localStorage.getItem("adminId");
+		const user = {
 			firstName: $('#account-first-name').val(),
 			lastName: $('#account-last-name').val(),
 			email: $('#account-email').val()
 		}
-		const requestId= adminId ? adminId : '';
+		const requestId = adminId ? adminId : '';
 		$.ajax({
 			method: "PUT",
 			url: `/api/users/${requestId}`,
 			contentType: "application/json; charset=utf-8",
-			dataType : "json",
+			dataType: "json",
 			data: JSON.stringify(user),
-			beforeSend: function(xhr) { 
+			beforeSend: function (xhr) {
 				xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);
 			},
-			success: function(data) {
+			success: function (data) {
 				getAccountInfo(data);
 				toastr.success('Account Updated');
 			},
-			error: function(xhr, status, error) {
+			error: function (xhr, status, error) {
 				console.log('Something went wrong');
 				console.log(xhr, status, error);
 			}
@@ -84,7 +84,7 @@ function deleteUserCallback() {
 	window.location.replace('/login')
 }
 
-function deleteAdminCallback () {
+function deleteAdminCallback() {
 	localStorage.removeItem("adminId");
 	window.location.replace('/app/admin')
 }
@@ -92,20 +92,20 @@ function deleteAdminCallback () {
 function deleteAccount() {
 	$('#edit-user-form').on('click', '#delete-user-info-button', event => {
 		event.preventDefault();
-		const adminId=localStorage.getItem("adminId");   
-		const authToken=localStorage.getItem("authToken"); 
-		const requestId= adminId ? adminId : '';
+		const adminId = localStorage.getItem("adminId");
+		const authToken = localStorage.getItem("authToken");
+		const requestId = adminId ? adminId : '';
 		$.ajax({
 			method: "DELETE",
 			url: `/api/users/${requestId}`,
 			contentType: "application/json; charset=utf-8",
-			dataType : "json",
-			beforeSend: function(xhr) { 
+			dataType: "json",
+			beforeSend: function (xhr) {
 				xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);
 			},
-			success: function(data) {
+			success: function (data) {
 				if (data.message === 'admin') {
-					deleteAdminCallback ();
+					deleteAdminCallback();
 					toastr.success('User Account Deleted');
 				}
 				else {
@@ -113,7 +113,7 @@ function deleteAccount() {
 					toastr.success('Account Deleted');
 				}
 			},
-			error: function(xhr, status, error) {
+			error: function (xhr, status, error) {
 				console.log('Something went wrong');
 				console.log(error);
 			}

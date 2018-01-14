@@ -7,7 +7,7 @@ function renderAdmin(data) {
 	<th>Timesheet</th>
 	<th>Account</th>
 </tr>` + data.reduce((output, entry) => {
-		return output + `
+			return output + `
 			<tr>
 				<td>${entry.firstName}</td>
 				<td>${entry.lastName}</td>
@@ -15,50 +15,50 @@ function renderAdmin(data) {
 				<td><button type="button" data-id="${entry._id}" class="admin-account-edit-button">Edit</button></td>
 			</tr>	
 		`;
-	   }, '');
+		}, '');
 }
 
 function displayAdmin(data) {
-	$('#employee-table').html(renderAdmin(data));	
+	$('#employee-table').html(renderAdmin(data));
 }
 
 function watchAdmin() {
-	const authToken=localStorage.getItem("authToken");    
+	const authToken = localStorage.getItem("authToken");
 	$.ajax({
 		method: "GET",
 		url: `/api/users/all-users`,
 		contentType: "application/json; charset=utf-8",
-		dataType : "json",
+		dataType: "json",
 		success: displayAdmin,
-		beforeSend: function(xhr) { 
-            xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);            
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);
 		},
-		error: function(xhr, status, error) {
+		error: function (xhr, status, error) {
 			window.location.replace('/login')
 			console.log('Something went wrong');
 			console.log(error);
- 		 }
+		}
 	});
 }
 
 function editUserAccount() {
 	$('#employee-table').on('click', '.admin-account-edit-button', event => {
-	event.preventDefault();
-	const adminId= $(event.currentTarget).data('id');
-    const authToken=localStorage.getItem("authToken");    
+		event.preventDefault();
+		const adminId = $(event.currentTarget).data('id');
+		const authToken = localStorage.getItem("authToken");
 		$.ajax({
 			method: "GET",
 			url: `/api/users/is-admin`,
 			contentType: "application/json; charset=utf-8",
-			dataType : "json",
-			success: function(data) {
-				localStorage.setItem('adminId', adminId);	
+			dataType: "json",
+			success: function (data) {
+				localStorage.setItem('adminId', adminId);
 				window.location.replace(`/app/account/`)
 			},
-			beforeSend: function(xhr) { 
-				xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);            
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);
 			},
-			error: function(xhr, status, error) {
+			error: function (xhr, status, error) {
 				console.log('Something went wrong');
 				console.log(xhr, status, error);
 			}
@@ -68,22 +68,22 @@ function editUserAccount() {
 
 function editTimesheet() {
 	$('#employee-table').on('click', '.admin-timesheet-edit-button', event => {
-	event.preventDefault();
-	const adminId= $(event.currentTarget).data('id');
-    const authToken=localStorage.getItem("authToken");    
+		event.preventDefault();
+		const adminId = $(event.currentTarget).data('id');
+		const authToken = localStorage.getItem("authToken");
 		$.ajax({
 			method: "GET",
 			url: `/api/users/is-admin`,
 			contentType: "application/json; charset=utf-8",
-			dataType : "json",
-			success: function(data) {
-				localStorage.setItem('adminId', adminId);	
+			dataType: "json",
+			success: function (data) {
+				localStorage.setItem('adminId', adminId);
 				window.location.replace(`/app/timesheet/`)
 			},
-			beforeSend: function(xhr) { 
-				xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);            
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader('Authorization', `Bearer ${authToken}`);
 			},
-			error: function(xhr, status, error) {
+			error: function (xhr, status, error) {
 				console.log('Something went wrong');
 				console.log(xhr, status, error);
 			}
