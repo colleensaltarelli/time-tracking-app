@@ -36,10 +36,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// set the view engine to ejs
 app.set('view engine', 'ejs');
 
-// declare ejs static files
 app.use("/stylesheets", express.static(__dirname + "/stylesheets"));
 app.use("/javascripts", express.static(__dirname + "/javascripts"));
 app.use("/images", express.static(__dirname + "/images"));
